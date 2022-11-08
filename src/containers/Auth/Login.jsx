@@ -9,9 +9,34 @@ const Login = () =>{
     const [email, setEmail] = useState('')
     const [username , setUsername] = useState('')
     const onLogin = async () => {
-        console.log(email); 
-        let result = await Auth.signIn(email);
-    }
+        try {
+            console.log(email); 
+            navigate('/confirmation')
+            let result = await Auth.signIn(email);
+            window.cognitoUser=result            
+            
+          } 
+          catch (error) {     
+            try {
+              await Auth.signUp({
+                username: email,
+                password: email,
+                attributes: {
+                  email: email,
+                  
+                }          
+              });
+              let result=await Auth.signIn(email);
+              window.cognitoUser=result
+              navigate('/confirmation')
+            }
+            catch(ex) {
+              console.log(ex);
+            }
+            
+          }
+         
+        }
     return (
         <LoginComponent
         email={email}

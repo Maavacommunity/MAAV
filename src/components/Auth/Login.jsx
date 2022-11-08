@@ -15,7 +15,7 @@ import * as yup from 'yup'
 
 import { Formik } from 'formik'
 import { Auth } from "aws-amplify";
-
+import { useToasts } from 'react-toast-notifications'
 import { useNavigate } from 'react-router-dom'
 
 const schema = yup.object().shape({
@@ -33,6 +33,7 @@ const Login = ({
   const user_email = useSelector(state => state.auth.currentUser.email )
  
   const [loginState, setLoginState] = useState(false);
+  const { addToast } = useToasts()
   const navigate = useNavigate()
   const responseGoogle = async (response) => {
     let tempEmail = response.profileObj.email;
@@ -58,7 +59,7 @@ const Login = ({
   }
 
   return (
-  <Container fluid class='container'>
+  <Container fluid>
     <Formik
       validationSchema={schema}
       onSubmit={e => onLogin()}
