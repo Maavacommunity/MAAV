@@ -13,8 +13,7 @@ const Login = () =>{
             console.log(email); 
             navigate('/confirmation')
             let result = await Auth.signIn(email);
-            window.cognitoUser=result            
-            
+            window.cognitoUser=result  
           } 
           catch (error) {     
             try {
@@ -22,8 +21,7 @@ const Login = () =>{
                 username: email,
                 password: email,
                 attributes: {
-                  email: email,
-                  
+                  email: email, 
                 }          
               });
               let result=await Auth.signIn(email);
@@ -33,9 +31,7 @@ const Login = () =>{
             catch(ex) {
               console.log(ex);
             }
-            
           }
-         
         }
     return (
         <LoginComponent
