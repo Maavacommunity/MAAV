@@ -181,8 +181,6 @@ const Profile = ({
               </div>
               
             </Form.Group>
-
-          
           </div>
        
         <div className='d-flex justify-content-end mt-4'>

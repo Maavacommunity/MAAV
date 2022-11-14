@@ -72,8 +72,7 @@ const Sidebar = ({logout}) => {
                 </div>
               )
             })
-          }
-           
+          }           
            <div className='log-out-img' onClick={()=>logout()}>
             <img src='/assets/images/log-out.svg'/>
           </div>
