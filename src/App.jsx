@@ -9,18 +9,33 @@ import { ToastProvider } from 'react-toast-notifications'
 import Login from './pages/Auth/Login';
 import Toast from './containers/Toast'
 import Confirmation from './pages/Auth/Confirmation'
-
+import Dashboard from './pages/Dashboard'
+import FirstView from './containers/firstview'
+import ProtectedRoute from './helpers/ProtectedRoute'
+import NonProtectedRoute from './helpers/NonProtectedRoute'
+import Preloader from './components/Preloader';
+import Sidebar from './components/Sidebar';
+import Profile from './pages/Profile';
+import './App.css'
 function App () {
   return (
     <Fragment>
-       <ToastProvider>
-    <Container className='app-container' style={{ marginTop: "70px"}}>
-      <Routes>
-        <Route path='/' element={<React.Fragment><Login/></React.Fragment>}/>
-        <Route path='/confirmation' element={<React.Fragment><Confirmation /></React.Fragment>} />
-      </Routes>
-    </Container>
-    </ToastProvider>
+      {/* <Header /> */}
+        <ToastProvider>
+          <Sidebar/>
+          <Container className='app-container' style={{ marginTop: "70px"}}>
+            <Routes>
+              <Route path='/overview' element={<React.Fragment><FirstView /></React.Fragment>} />
+              <Route path='/dashboard' element={<React.Fragment><ProtectedRoute><Dashboard /></ProtectedRoute></React.Fragment>} />
+              <Route path='/' element={<React.Fragment><Login /></React.Fragment>} />
+              <Route path='/confirmation' element={<React.Fragment><Confirmation /></React.Fragment>} />
+              <Route path='/profile' element={<React.Fragment><Profile /></React.Fragment>} />
+
+            </Routes>
+            
+            {/* <Toast /> */}
+          </Container>
+        </ToastProvider>
     </Fragment>
   )
 }

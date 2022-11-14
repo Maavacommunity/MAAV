@@ -14,7 +14,7 @@ import {
   } from 'react-router-dom'
   import * as yup from 'yup'
   import { Formik } from 'formik'
-  
+  import { useEffect } from 'react'
   const schema = yup.object().shape({
     code: yup.string().required('Please input verification code'),
   });
@@ -29,6 +29,13 @@ import {
   }) => {
     const email = useSelector(state => state.auth.currentUser.email )
     const phone = useSelector(state => state.auth.currentUser.phone )
+
+    useEffect(() => {
+      document.body.classList.add('login-layout')
+      return () => {
+        document.body.classList.remove('login-layout')
+      }
+    }, [])
     return  (
     <Container fluid>
       <Row className='d-flex flex-column justify-content-between align-items-center' style={{paddingTop:'100px'}}>
@@ -40,7 +47,7 @@ import {
               onConfirmation()
             }
             initialValues={{
-              code: code
+              code: 123456
             }}
           >
             {({

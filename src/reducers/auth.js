@@ -1,7 +1,7 @@
 import {
     AUTH_LOGIN,
-   // AUTH_LOGOUT,
-    //AUTH_SIGNUP
+   AUTH_LOGOUT,
+    AUTH_SIGNUP
   } from '../constants/actionTypes/auth'
   
   const INITIAL_STATE = {
@@ -18,7 +18,21 @@ import {
           ...state,
           currentUser: action.user
         }
-      
+        case AUTH_LOGOUT:
+          return {
+            ...state,
+            currentUser: {
+              email: '',
+            }
+          }
+        case AUTH_SIGNUP:
+          return {
+            ...state,
+            currentUser: {
+              email: action.email,
+              phone: action.phone
+            }
+          }
       default:
         return state
     }

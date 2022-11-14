@@ -1,5 +1,11 @@
-.App {
-  text-align: center;
+.app-container{
+  padding-left: 120px !important;
+}
+
+@media (max-width: 550px) {
+  .app-container{
+    padding: 0px 20px !important;
+  }
 }
 
 .App-logo {
@@ -35,4 +41,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+.login-layout .sidebar-show,
+.login-layout .sidebar-container{
+  display: none  !important;
+}
+.login-layout .app-container{
+  padding-left: 0 !important;
 }

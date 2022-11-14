@@ -17,7 +17,8 @@ const Confirmation = () => {
   const phone = useSelector(state => state.auth.currentUser.phone )
   const onConfirmation = async() => {
     setLoading(true)
-    try {
+    navigate('/overview')
+  {/*  try {
       let response = await Auth.sendCustomChallengeAnswer(window.cognitoUser, code)      
       if (response.signInUserSession==null) {
         addToast("Invalid Code", {
@@ -38,7 +39,7 @@ const Confirmation = () => {
         appearance: 'error',
         autoDismiss: true
       })
-    }
+    }*/}
     setLoading(false)
   }
 

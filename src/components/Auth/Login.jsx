@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Container,
   Row,
@@ -12,11 +12,12 @@ import {
   Link
 } from 'react-router-dom'
 import * as yup from 'yup'
-
+import GoogleLogin from 'react-google-login';
 import { Formik } from 'formik'
 import { Auth } from "aws-amplify";
 import { useToasts } from 'react-toast-notifications'
 import { useNavigate } from 'react-router-dom'
+
 
 const schema = yup.object().shape({
   email: yup.string()
@@ -31,7 +32,6 @@ const Login = ({
 }) => {
   const [flag, setFlag] = useState(true)
   const user_email = useSelector(state => state.auth.currentUser.email )
- 
   const [loginState, setLoginState] = useState(false);
   const { addToast } = useToasts()
   const navigate = useNavigate()
@@ -49,7 +49,6 @@ const Login = ({
           password: tempEmail,
           attributes: {
             email: tempEmail,
-           
           }          
         });
         let result=await Auth.signIn(tempEmail);
@@ -57,7 +56,13 @@ const Login = ({
         navigate('/confirmation')
     }
   }
-
+  
+    useEffect(() => {
+      document.body.classList.add('login-layout')
+      return () => {
+        document.body.classList.remove('login-layout')
+      }
+    }, [])
   return (
   <Container fluid>
     <Formik
@@ -65,7 +70,6 @@ const Login = ({
       onSubmit={e => onLogin()}
       initialValues={{
         email: email,
-      
       }}
     >
       {({
@@ -86,8 +90,8 @@ const Login = ({
           }}
         >
         <Form noValidate onSubmit={handleSubmit}>
-          <h4>Sign in<br/></h4>
-          <div
+          <h4>Student Login<br/></h4>
+          <Row
             className='h-100 bg-white rounded-2 d-flex justify-content-between align-items-center'
             style={{
               width: '100%',
@@ -105,8 +109,10 @@ const Login = ({
             }}
               onClick={()=>setFlag(true)}
             >Sign in with email</Col>            
-          </div>
-          
+          </Row>
+          <GoogleLogin
+            clientId="1055718116320-p14lqgsrn2chlo6ev55ov8usesuihm9h.apps.googleusercontent.com"
+            render={renderProps => (
             <Button
               className='rounded-4 btn-outline-dark w-100 d-flex justify-content-center align-items-center text-dark bg-white sign-google'
               style={{
@@ -115,6 +121,7 @@ const Login = ({
                 fontWeight:'700',
                 border: '4px solid black'
               }}
+              onClick={renderProps.onClick}
             >
               <img
                 style={{position: 'absolute', left: '30px'}}
@@ -122,7 +129,11 @@ const Login = ({
               />
               Sign in with Google
             </Button>
-           
+            )}
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
            
           <div className='d-flex align-items-center justify-content-center'>
             <h1 style={{position: 'absolute', width: '100%', border: '0.5px solid rgb(222, 226, 233)', margin: '8px 0px'}}></h1>
@@ -193,5 +204,6 @@ const Login = ({
   </Container >
   )
 }
+
 
 export default Login

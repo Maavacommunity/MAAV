@@ -10,7 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
 //import "bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter  } from 'react-router-dom';
-import './global.css'
+import './global.scss'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const middlewares = [reduxThunk]
