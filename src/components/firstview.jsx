@@ -7,13 +7,6 @@ import fetch from '../helpers/methods'
 
 const alertTexts = [
   'Basic information about your identity and residency status.',
-  'Details about your financial situation to help us calculate your loan amount.',
-  'Information about the property you’re buying and the type of financing you need.',
-  'Calculate your estimated monthly payments based on the loan amount.',
-  'See personalized recommendations for the best offers based on the info you provided.',
-  'Easily upload all the documents required by the bank.',
-  'Review and finalize the application to send to the bank of your choice.',
-  'Once the bank issues your pre-approval, you can download it from here.',
 ]
 
 const FirstView = () => {
@@ -27,17 +20,14 @@ const FirstView = () => {
           Ready to continue? All your progress has been saved automatically, so you can easily pick up where you left off.</p>
         <div className='center-section'>
           <div className='left-block'>
-            <div className='progress'>
+           
             
                 <img src='/assets/images/house-heart.1f206df2.svg'/>
               
-            </div>
+            
             <div className='text-bar'>
               <div className='subtext1'>
                  </div>
-              <div className='subtext2'>
-                The more you progress, the higher the number gets! Your progress is saved automatically.
-              </div>
             </div>
           </div>
           <div className='right-block'>

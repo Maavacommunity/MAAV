@@ -7,6 +7,7 @@ import ProfileComponent from '../components/Profile'
 import { sidebar_check } from '../actions/sidebar'
 import { profile } from '../actions/profile'
 import { Auth } from 'aws-amplify'
+import { useNavigate} from 'react-router-dom'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -21,15 +22,25 @@ const Profile = () => {
   const [birthDate, setBirthDate] = useState(new Date())
   const [currentEmail, setCurrentEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [file , setFile] = useState('')
+
   const userData = {    
     first_name:firstName,
     last_name:lastName,
     email:currentEmail ? currentEmail : email,
     phone_number:phoneNumber,
     birth_date:birthDate.getUTCFullYear() + "-" + (birthDate.getUTCMonth() + 1) + "-" + birthDate.getUTCDate(),
+    file:file,
   }
+  function handleProfile(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+}
   const handleData = async () => {
-    console.log(firstName)
+    console.log(userData)
+    localStorage.setItem("userData",JSON.stringify(userData))
+   
+    
     {/*let session = await Auth.currentSession();    
     try {    
       dispatch(profile(userData));      
@@ -52,7 +63,7 @@ const Profile = () => {
       autoDismiss:true
     })*/}
   }
-
+ 
   return (
     <ProfileComponent 
       firstName={firstName}
@@ -70,8 +81,11 @@ const Profile = () => {
       martial={martial}
       setMartial={setMartial}
       birthDate={birthDate}
+      file={file}
+      setFile={setFile}
       setBirthDate={setBirthDate}
       handleData={handleData}
+      handleProfile={handleProfile}
       userData={userData}
       currentEmail={currentEmail}
       setCurrentEmail={setCurrentEmail}

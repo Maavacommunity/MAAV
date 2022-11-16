@@ -10,10 +10,13 @@ const Login = () =>{
     const [password, setPassword ]= useState('')
     const [email, setEmail] = useState('')
     const [username , setUsername] = useState('')
+    const [loading, setLoading] = useState(false)
     const onLogin = async () => {
+      setLoading(true)
         try {
             console.log(email); 
             navigate('/confirmation')
+            localStorage.setItem('user' , email )
             let result = await Auth.signIn(email);
             window.cognitoUser=result  
           } 
@@ -34,6 +37,7 @@ const Login = () =>{
               console.log(ex);
             }
           }
+          setLoading(false)
         }
     return (
         <LoginComponent
@@ -44,6 +48,7 @@ const Login = () =>{
         username={username}
         setUsername={setUsername}
         onLogin={onLogin}
+        loading={loading}
         />
     )
 }

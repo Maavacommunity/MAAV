@@ -43,16 +43,32 @@ const Profile = ({
   setBirthDate,
   handleData,
   currentEmail,
+  phoneNumber,
+  file,
+  setFile,
+  handleProfile,
   setPhoneNumber,
   handleAlert
 }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [seed, setSeed] = useState(1);
+  
   const reset = () => {
       setSeed(Math.random());
   }
-  
+
+  useEffect(() => {
+    const data = JSON.parse (localStorage.getItem('userData'));
+    //const user_first_name = data.first_name;
+  })
+   
+    //const user_last_name= data.last_name;
+    // const user_email= data.email;
+    // const user_phonenumber= data.phone_number;
+    // const user_birthdate= data.birth_date;
+    // const user_file= data.file;
+   
   return (
     <Container fluid>
       <div className='pb-5' style={{paddingTop:'20px'}}>
@@ -66,17 +82,37 @@ const Profile = ({
           Complete some basic information about your identity and residency status. 
           Please fill in the details as it appears on your Emirates ID or passport.
         </p>
+
         <Card className='striped-tabled-with-hover mt-5 py-5 px-3' style={{borderRadius:'20px',boxShadow: 'rgb(127 133 148 / 12%) 0px -4px 16px'}}>
+        <Row style={{display:'flex'}}>
+          <Col 
+          style={{
+            width:'100%'
+          }}>
         <h4 style={{
           fontFamily: 'AGaramond-regular',
           fontSize: '32px',
           letterSpacing: '-2px',
         }}
         >Your Details</h4>
-        <p>Please fill in all the fields in order to ensure a complete application.</p>
+        <p>Please fill in all the fields in order to ensure a complete application.</p></Col>
+        {file ? 
+        <Col
+        className='d-flex flex-row-reverse'
+        style={{
+          alignItems:'flex-end',
+          width:'100%',
+          marginRight:'3rem',
+         
+        }}>
+        <img src={file} className="p-2 profile"/>
+        </Col>
+        : <></>
+      }
+        </Row>
         <Formik
           validationSchema={schema}
-          onSubmit={console.log('')}
+          //onSubmit={console.log('')}
           initialValues={{
             firstName: firstName,
             lastName: lastName,
@@ -101,6 +137,7 @@ const Profile = ({
                   type="text" 
                   name='firstName' 
                   value={ firstName}
+                 //disabled={user_first_name ? true : false }
                   onChange={
                     e => {handleChange(e)
                     setFirstName(e.target.value)
@@ -118,7 +155,7 @@ const Profile = ({
                   type="text" 
                   name='lastName'  
                   value={ lastName}
-                 
+                  //disabled={user_last_name ? true : false}
                   onChange={e => {handleChange(e);
                   setLastName(e.target.value)
                   }}
@@ -134,10 +171,11 @@ const Profile = ({
               <div style={{width:'100%'}}>
                 <Form.Label>Email</Form.Label>
                   <Form.Control 
-                    disabled={currentEmail ? true : false}
+                  
                     type="email" 
                     name='email' 
-                    value={currentEmail ? currentEmail : email}
+                    value={ email}
+                   // disabled={user_email ? true : false}
                     onChange={e => {
                       handleChange(e);
                       setEmail(e.target.value)
@@ -152,7 +190,8 @@ const Profile = ({
                 <Form.Label>Phone Number</Form.Label>
                 <PhoneInput
                   className='phone-number-input'
-                
+                  value={  phoneNumber}
+                 // disabled={user_phonenumber ? true : false}
                   type='tel'
                   placeholder="Enter phone number"
                   international
@@ -168,8 +207,8 @@ const Profile = ({
                 <Form.Label>Date of birth</Form.Label>
                 <DatePicker 
                   value={ new Date()}
-                
-                  selected={birthDate} 
+                  //disabled={user_birthdate?true :false}
+                 selected={birthDate} 
                   onChange={(date) => setBirthDate(date)}
                   peekNextMonth
                   showMonthDropdown
@@ -178,6 +217,13 @@ const Profile = ({
                   dateFormat={(birthDate, "yyyy-MM-dd")
                 }
                 />
+              </div>
+              <div style={{width:'100%'}}>
+                <Form.Label>Add Profile</Form.Label>
+                <Form.Control name="file" type="file" onChange={handleProfile} 
+                //disabled={file}
+                >
+                  </Form.Control>
               </div>
               
             </Form.Group>
@@ -197,7 +243,7 @@ const Profile = ({
               Next step
             </Button>
             :
-            <Link to='/income'
+            <Link to='/application'
               style={{
                 textDecoration: 'none'
               }}

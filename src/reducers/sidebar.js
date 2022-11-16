@@ -5,11 +5,13 @@ import {
   const INITIAL_STATE = [
     {
       imgurl: '/assets/images/single-neutral-actions.a8cd97b5.svg',
-      name:'Profile',
+      name:'profile',
     },
     {
       imgurl: '/assets/images/common-file-text-info.4b1bedfc.svg',
-      name:'Application',
+      name:'application',
+     // check: Boolean(localStorage.getItem('application')) ? Boolean(localStorage.getItem('application')) : false,
+
     },
     
     

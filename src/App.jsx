@@ -30,9 +30,9 @@ function App () {
               <Route path='/' element={<React.Fragment><Login /></React.Fragment>} />
               <Route path='/confirmation' element={<React.Fragment><Confirmation /></React.Fragment>} />
               <Route path='/profile' element={<React.Fragment><Profile /></React.Fragment>} />
-
+              
             </Routes>
-            
+            {/* <Preloader/> */}
             {/* <Toast /> */}
           </Container>
         </ToastProvider>
