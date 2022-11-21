@@ -59,7 +59,7 @@ const Profile = ({
   }
 
  
-    const data = JSON.parse (localStorage.getItem('userData'));
+    const data = localStorage.getItem('userData');
     console.log(data)
     //const user_first_name = data.first_name;
 

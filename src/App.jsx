@@ -16,6 +16,7 @@ import NonProtectedRoute from './helpers/NonProtectedRoute'
 import Preloader from './components/Preloader';
 import Sidebar from './components/Sidebar';
 import Profile from './pages/Profile';
+import Docs from './pages/Docs'
 import Application from './pages/Application'
 import './App.css'
 function App () {
@@ -32,7 +33,7 @@ function App () {
               <Route path='/confirmation' element={<React.Fragment><Confirmation /></React.Fragment>} />
               <Route path='/profile' element={<React.Fragment><Profile /></React.Fragment>} />
               <Route path='/application' element={<React.Fragment><Application /></React.Fragment>} />
-              
+              <Route path='/docs' element={<React.Fragment><Docs /></React.Fragment>} />
             </Routes>
             {/* <Preloader/> */}
             {/* <Toast /> */}
