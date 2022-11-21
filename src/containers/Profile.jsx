@@ -37,6 +37,7 @@ const Profile = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
 }
   const handleData = async () => {
+    
     console.log(userData)
     localStorage.setItem("userData",JSON.stringify(userData))
    

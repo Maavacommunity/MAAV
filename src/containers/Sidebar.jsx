@@ -36,6 +36,7 @@ const Sidebar = () => {
   }, [path.pathname]);
 
   return (
+   
     <>
       {pathname ? <SidebarComponent logout={logOut}/> : <></>}
     </>

@@ -1,8 +1,10 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { sidebar_check } from '../actions/sidebar'
 import fetch from '../helpers/methods';
+import { useToasts } from 'react-toast-notifications'
 import {
   Badge,
   Button,
@@ -12,7 +14,9 @@ import {
 //   'profile','income','property','payment','offers','docs','application','approval'
 // ]
 
-const Sidebar = ({logout}) => {
+const Sidebar = ({
+    logout,
+}) => {
   useEffect(() => {
     console.log('check')
     
@@ -20,6 +24,7 @@ const Sidebar = ({logout}) => {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
+  const { addToast } = useToasts()
   const sidebar = useRef()
   //const _progressValue = useSelector((state) => state.progress.progressValue)
   const sideData = useSelector((state) => state.sidebar)
@@ -72,10 +77,15 @@ const Sidebar = ({logout}) => {
                 </div>
               )
             })
-          }           
+          }  
+          
            <div className='log-out-img' onClick={()=>logout()}>
+           <Link to="/"
+           >  
             <img src='/assets/images/log-out.svg'/>
+            </Link> 
           </div>
+              
         </div>
         {/* <div className='sub-text'>
           <img src='/assets/images/persent.svg'/>

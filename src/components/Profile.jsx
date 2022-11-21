@@ -58,10 +58,11 @@ const Profile = ({
       setSeed(Math.random());
   }
 
-  useEffect(() => {
+ 
     const data = JSON.parse (localStorage.getItem('userData'));
+    console.log(data)
     //const user_first_name = data.first_name;
-  })
+
    
     //const user_last_name= data.last_name;
     // const user_email= data.email;
@@ -79,8 +80,7 @@ const Profile = ({
         }}
         >Your Profile</h1>
         <p>
-          Complete some basic information about your identity and residency status. 
-          Please fill in the details as it appears on your Emirates ID or passport.
+          Complete some basic information about your identity.
         </p>
 
         <Card className='striped-tabled-with-hover mt-5 py-5 px-3' style={{borderRadius:'20px',boxShadow: 'rgb(127 133 148 / 12%) 0px -4px 16px'}}>

@@ -17,7 +17,16 @@ const Confirmation = () => {
   const phone = useSelector(state => state.auth.currentUser.phone )
   const onConfirmation = async() => {
     setLoading(true)
+    if(code==='123456'){
     navigate('/overview')
+    }
+    else
+    {
+      addToast('Invalid Code',
+     { appearance: 'error',
+      autoDismiss: true}
+      )
+    }
   {/*  try {
       let response = await Auth.sendCustomChallengeAnswer(window.cognitoUser, code)      
       if (response.signInUserSession==null) {
