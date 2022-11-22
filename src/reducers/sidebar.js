@@ -15,7 +15,7 @@ import {
     },
     {
       imgurl: '/assets/images/accounting-document.9de57dcf.svg',
-      name:'docs',
+      name:'documents',
      // check: Boolean(localStorage.getItem('application')) ? Boolean(localStorage.getItem('application')) : false,
 
     },

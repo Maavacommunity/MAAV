@@ -1,3 +1,4 @@
+import react,{useState} from 'react'
 import {
     Container,
     Row,
@@ -7,7 +8,20 @@ import {
   } from 'react-bootstrap'
   import { Link } from 'react-router-dom'
   
-  const Application = () => {
+  const Application = ({
+    school,
+    setSchool,
+    handleSchool,
+  }) => {
+   
+   // const [school, setSchool] = useState(false);
+    const [college, setCollege] = useState(false);
+    const [university, setUniversity] = useState(false);
+    console.log(school)
+
+    
+
+
     return (
       <Container fluid>
         <Row className='d-flex flex-column justify-content-center align-items-center' style={{marginTop:'150px'}}>
@@ -23,14 +37,14 @@ import {
           </Row>
           <Row className='d-flex justify-content-center align-items-center mt-5 gap-3'>
             <Col lg={3}>
-              <Link to='#'
+              <Link to='/list'
                style={{
                 textDecoration: 'none',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 color: 'black',
-              }}
+              }} 
               >
                 <Card
                   className='card-hover d-flex justify-content-center align-items-center border-0'
@@ -39,7 +53,7 @@ import {
                     width: '100%',
                     height: '150px',
                   }}
-                >
+                 >
                   <img style={{width: '35%', marginBottom: '5px'}} src='/assets/images/school.png'/>
                   School
                 </Card>
@@ -52,6 +66,9 @@ import {
                 justifyContent: 'center',
                 alignItems: 'center',
                 color: 'black',
+              }}
+              onClick={() => {
+                setCollege(true)
               }}>
                 <Card
                   className='card-hover d-flex justify-content-center align-items-center border-0'
@@ -73,7 +90,11 @@ import {
                 justifyContent: 'center',
                 alignItems: 'center',
                 color: 'black',
-              }}>
+              }}
+               onClick={() => {
+                setUniversity(true)
+              }}
+           >
                 <Card
                   className='card-hover d-flex justify-content-center align-items-center border-0'
                   style={{
@@ -81,7 +102,7 @@ import {
                     width: '100%',
                     height: '150px',
                   }}
-                >
+                  >
                   <img style={{width: '40%'}} src='/assets/images/university.png'/>
                   University
                 </Card>

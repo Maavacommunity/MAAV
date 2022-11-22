@@ -5,9 +5,6 @@ import {
 const INITIAL_STATE = {
   currentUser: {
     transcriptPath:'',
-    passportPath:'',
-    visaPath:'',
-    EIDPath:'',
     submittedCrm:false
   }
 }

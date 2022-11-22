@@ -18,6 +18,8 @@ import Sidebar from './components/Sidebar';
 import Profile from './pages/Profile';
 import Docs from './pages/Docs'
 import Application from './pages/Application'
+import Schoollist from './pages/Schoollist';
+import Gradelist from './pages/Gradelist';
 import './App.css'
 function App () {
   return (
@@ -33,7 +35,9 @@ function App () {
               <Route path='/confirmation' element={<React.Fragment><Confirmation /></React.Fragment>} />
               <Route path='/profile' element={<React.Fragment><Profile /></React.Fragment>} />
               <Route path='/application' element={<React.Fragment><Application /></React.Fragment>} />
-              <Route path='/docs' element={<React.Fragment><Docs /></React.Fragment>} />
+              <Route path='/documents' element={<React.Fragment><Docs /></React.Fragment>} />
+              <Route path='/list' element={<React.Fragment><Schoollist /></React.Fragment>} />
+              <Route path='/grade' element={<React.Fragment><Gradelist /></React.Fragment>} />
             </Routes>
             {/* <Preloader/> */}
             {/* <Toast /> */}
