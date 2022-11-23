@@ -1,10 +1,12 @@
 import react,{useState} from 'react'
+import { Formik } from 'formik'
 import {
     Container,
     Row,
     Col,
     Button,
-    Card
+    Card,
+    Form
   } from 'react-bootstrap'
   import { Link } from 'react-router-dom'
   
@@ -12,16 +14,17 @@ import {
     school,
     setSchool,
     handleSchool,
+    college,
+    setCollege,
+    handleCollege,
+    university,
+    setUniversity,
+    handleUniversity,
+  
   }) => {
    
-   // const [school, setSchool] = useState(false);
-    const [college, setCollege] = useState(false);
-    const [university, setUniversity] = useState(false);
-    console.log(school)
-
+    // const [school, setSchool] = useState(false);
     
-
-
     return (
       <Container fluid>
         <Row className='d-flex flex-column justify-content-center align-items-center' style={{marginTop:'150px'}}>
@@ -36,8 +39,13 @@ import {
             </h2>
           </Row>
           <Row className='d-flex justify-content-center align-items-center mt-5 gap-3'>
-            <Col lg={3}>
-              <Link to='/list'
+            <Col lg={3}
+            onClick={(e) => {
+              // setSchool(true)
+              handleSchool(e)
+            }}
+            >
+              <Link to='#'
                style={{
                 textDecoration: 'none',
                 display: 'flex',
@@ -59,7 +67,10 @@ import {
                 </Card>
               </Link>
             </Col>
-            <Col lg={3}>
+            <Col lg={3} onClick={(e) => {
+              // setSchool(true)
+              handleCollege(e)
+            }}>
               <Link to='#' style={{
                 textDecoration: 'none',
                 display: 'flex',
@@ -83,7 +94,10 @@ import {
                 </Card>
               </Link>
             </Col>
-            <Col lg={3}>
+            <Col lg={3} onClick={(e) => {
+              // setSchool(true)
+              handleUniversity(e)
+            }}>
               <Link to='#' style={{
                 textDecoration: 'none',
                 display: 'flex',

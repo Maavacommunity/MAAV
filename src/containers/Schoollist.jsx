@@ -29,13 +29,23 @@ const Schoollist = () => {
     
     data.append('school', school)
    
-    if (school) {
+    if (school.length==5) {
      
       console.log(data.get('school'))
      navigate('/grade')
     
-    } else {
-     console.log("error")
+    } 
+    if(school.length>5){
+      addToast('Please Select only 5',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
+    }
+     if(school.length<5) {
+      addToast('Please Select Atleast 5',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
     }
   }
 

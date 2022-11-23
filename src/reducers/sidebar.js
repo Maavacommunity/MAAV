@@ -13,12 +13,12 @@ import {
      // check: Boolean(localStorage.getItem('application')) ? Boolean(localStorage.getItem('application')) : false,
 
     },
-    {
-      imgurl: '/assets/images/accounting-document.9de57dcf.svg',
-      name:'documents',
-     // check: Boolean(localStorage.getItem('application')) ? Boolean(localStorage.getItem('application')) : false,
+    // {
+    //   imgurl: '/assets/images/accounting-document.9de57dcf.svg',
+    //   name:'documents',
+    //  // check: Boolean(localStorage.getItem('application')) ? Boolean(localStorage.getItem('application')) : false,
 
-    },
+    // },
     
     
   ]

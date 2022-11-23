@@ -4,10 +4,7 @@ import {
   
   const INITIAL_STATE = {
     currentUser: {
-      firstName:'',
-      lastName:'',
-      phoneNumber:'',
-      birthDate:'',
+      
     }
   }
   

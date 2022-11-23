@@ -8,6 +8,8 @@ import {
     Form,
     InputGroup,
     Button,
+    Input,
+    Label,
     Badge,
     Card, 
   } from 'react-bootstrap'
@@ -20,12 +22,11 @@ import {
   });
 const Gradelist =({
     Grade,
-    school,
-    setSchool,
-    getSchool,
+    grade,
+    setGrade,
+    getGrade,
     handleSubmit
 })=> {
-
 
   // Multi Checkbox
   
@@ -36,12 +37,10 @@ const Gradelist =({
         <Formik validationSchema={schema}
          // onSubmit={console.log('')}
           initialValues={{
-           
-
           }}
         >
         {({
-          handleSubmit,
+          //handleSubmit,
           handleChange,
           handleBlur,
           values,
@@ -52,27 +51,124 @@ const Gradelist =({
             <Row className='d-flex mt-5'>
               <Col lg={3}>
                 <h4>Select Your Grade</h4>
-                
               </Col>
-            
             </Row>
-      {Grade.map((item, index) => (
-         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
-         <Form.Check
-         inline
-           type='radio'
-           //name={item}
-           value={item}
-           label={item}
-          // value={item}
-          onChange={(e) => {
-           console.log(e.target.value)
-          }}
-         />
-         </Col>
-      ))}
-              <div className='d-flex justify-content-end mt-4'>
            
+         <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+        
+          <Form.Check 
+              inline
+              type='radio'
+              label='Grade 1'
+              value='Grade 1'
+              name='group'
+              id='radio_1'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+
+               
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+              <Form.Check 
+              inline
+              type='radio'
+              label='Grade 2'
+              value='Grade 2'
+              name='group'
+              id='radio_2'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+            <Form.Check 
+              inline
+              type='radio'
+              label='Grade 3'
+              value='Grade 3'
+              name='group'
+              id='radio_3'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+             <Form.Check 
+              inline
+              type='radio'
+              label='Grade 4'
+              value='Grade 4'
+              name='group'
+              id='radio_4'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+             <Form.Check 
+              inline
+              type='radio'
+              label='Grade 5'
+              value='Grade 5'
+              name='group'
+              id='radio_5'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+              <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+             <Form.Check 
+              inline
+              type='radio'
+              label='Grade 6'
+              value='Grade 6'
+              name='group'
+              id='radio_6'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+             <Form.Check 
+              inline
+              type='radio'
+              label='Grade 7'
+              value='Grade 7'
+              name='group'
+              id='radio_7'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+             <Form.Check 
+              inline
+              type='radio'
+              label='Grade 8'
+              value='Grade 8'
+              name='group'
+              id='radio_8'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+            <Form.Check 
+              inline
+              type='radio'
+              label='Grade 9'
+              value='Grade 9'
+              name='group'
+              id='radio_9'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+            </div>
+            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+             <Form.Check 
+              inline
+              type='radio'
+              label='Grade 10'
+              value='Grade 10'
+              name='group'
+              id='radio_10'
+              onChange={(e) => setGrade(e.target.value)}
+            />
+         </div>
+  
+              <div className='d-flex justify-content-end mt-4'>
             <Button
               className="d-flex justify-content-center align-items-center rounded-4"
               style={{minWidth:'150px'}}

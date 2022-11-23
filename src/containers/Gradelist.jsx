@@ -10,8 +10,20 @@ const Gradelist = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { addToast } = useToasts()
-  const [school , setSchool] = useState ([]);
- 
+  const [grade , setGrade] = useState ();
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    // const data = new FormData()
+    // data.append('grade', grade)
+    if (grade) {
+      console.log(grade)
+      
+      navigate('/documents')
+    }
+    else {
+      console.log('error')
+    }
+  }
 
   const Grade = [
     'Grade 1',
@@ -30,6 +42,10 @@ const Gradelist = () => {
   return (
     <GradelistComponent 
    Grade={Grade}
+   grade={grade}
+   setGrade={setGrade}
+  //getGrade={getGrade}
+   handleSubmit={handleSubmit}
     />
   )
 }
