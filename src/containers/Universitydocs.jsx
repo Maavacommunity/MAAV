@@ -9,11 +9,17 @@ import { useNavigate } from 'react-router';
 import { sidebar_check } from '../actions/sidebar'
 
 const Universitydocs = () => {
-  const [Transcript_Modal, set_Transcript_Modal] = useState(false);
-  const [transcript, setTranscript] = useState('');
-  const [transcriptName, setTranscriptName] = useState('');
-  const handle_Close_Transcript = () => {set_Transcript_Modal(false)};
-  const handle_Transcript_Modal = () => {set_Transcript_Modal(true)};
+  const [Alevel_Modal, set_Alevel_Modal] = useState(false);
+  const [alevel, setAlevel] = useState('');
+  const [alevelName, setAlevelName] = useState('');
+  const handle_Close_Alevel = () => {set_Alevel_Modal(false)};
+  const handle_Alevel_Modal = () => {set_Alevel_Modal(true)};
+
+  const [Olevel_Modal, set_Olevel_Modal] = useState(false);
+  const [olevel, setOlevel] = useState('');
+  const [olevelName, setOlevelName] = useState('');
+  const handle_Close_Olevel = () => {set_Olevel_Modal(false)};
+  const handle_Olevel_Modal = () => {set_Olevel_Modal(true)};
 
   const [Application_Modal, set_Application_Modal] = useState(false);
   const [application, setApplication] = useState('');
@@ -21,11 +27,11 @@ const Universitydocs = () => {
   const handle_Close_Application = () => {set_Application_Modal(false)};
   const handle_Application_Modal = () => {set_Application_Modal(true)};
 
-  const [FatherID_Modal, set_FatherID_Modal] = useState(false);
-  const [fatherID, setFatherID] = useState('');
-  const [fatherIDName, setFatherIDName] = useState('');
-  const handle_Close_FatherID = () => {set_FatherID_Modal(false)};
-  const handle_FatherID_Modal = () => {set_FatherID_Modal(true)};
+  const [Reference_Modal, set_Reference_Modal] = useState(false);
+  const [reference, setReference] = useState('');
+  const [referenceName, setReferenceName] = useState('');
+  const handle_Close_Reference = () => {set_Reference_Modal(false)};
+  const handle_Reference_Modal = () => {set_Reference_Modal(true)};
 
   const [StudentID_Modal, set_StudentID_Modal] = useState(false);
   const [studentID, setStudentID] = useState('');
@@ -37,17 +43,28 @@ const Universitydocs = () => {
   const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-  const handleTranscriptUpload = async (e) => {
-    console.log("handleTranscriptUpload")
-    console.log(transcript.name)
-    localStorage.setItem('transcript', transcript.name)
+  const handleAlevelUpload = async (e) => {
+    console.log("handleAlevelUpload")
+    console.log(alevel.name)
+    localStorage.setItem('alevel', alevel.name)
   }
 
-  const handleTranscript = (e) => {    
-    setTranscript(e.target.files[0])
-    set_Transcript_Modal(false);
+  const handleAlevel = (e) => {    
+    setAlevel(e.target.files[0])
+    set_Alevel_Modal(false);
   }
   
+  const handleOlevelUpload = async (e) => {
+    console.log("handleOlevelUpload")
+    console.log(olevel.name)
+    localStorage.setItem('olevel', olevel.name)
+  }
+
+  const handleOlevel = (e) => {    
+    setOlevel(e.target.files[0])
+    set_Olevel_Modal(false);
+  }
+
   const handleApplicationUpload = async (e) => {
     console.log("handleApplicationUpload")
     console.log(application.name)
@@ -58,15 +75,15 @@ const Universitydocs = () => {
     setApplication(e.target.files[0])
     set_Application_Modal(false);
   }
-  const handleFatherIDUpload = async (e) => {
-    console.log("handleFatherIDUpload")
-    console.log(fatherID.name)
-    localStorage.setItem('fatherId', fatherID.name)
+  const handleReferenceUpload = async (e) => {
+    console.log("handleReferenceUpload")
+    console.log(reference.name)
+    localStorage.setItem('reference', reference.name)
   }
 
-  const handleFatherID = (e) => {    
-    setFatherID(e.target.files[0])
-    set_FatherID_Modal(false);
+  const handleReference = (e) => {    
+    setReference(e.target.files[0])
+    set_Reference_Modal(false);
   }
 
   
@@ -98,14 +115,23 @@ const Universitydocs = () => {
   return (
    
     <UniversitydocsComponent 
-      handleTranscript={handleTranscript}
-      handle_Close_Transcript={handle_Close_Transcript}
-      Transcript_Modal={Transcript_Modal}
-      handle_Transcript_Modal={handle_Transcript_Modal}
-      handle_Transcript_Upload={handleTranscriptUpload}
-      setTranscript={setTranscript}
-      transcriptName={transcriptName}
-      transcript={transcript}
+      handleAlevel={handleAlevel}
+      handle_Close_Alevel={handle_Close_Alevel}
+      Alevel_Modal={Alevel_Modal}
+      handle_Alevel_Modal={handle_Alevel_Modal}
+      handle_Alevel_Upload={handleAlevelUpload}
+      setAlevel={setAlevel}
+      alevelName={alevelName}
+      alevel={alevel}
+
+      handleOlevel={handleOlevel}
+      handle_Close_Olevel={handle_Close_Olevel}
+      Olevel_Modal={Olevel_Modal}
+      handle_Olevel_Modal={handle_Olevel_Modal}
+      handle_Olevel_Upload={handleOlevelUpload}
+      setOlevel={setOlevel}
+      olevelName={olevelName}
+      olevel={olevel}
 
       handleApplication={handleApplication}
       handle_Close_Application={handle_Close_Application}
@@ -116,14 +142,14 @@ const Universitydocs = () => {
       applicationName={applicationName}
       application={application}
 
-      handleFatherID={handleFatherID}
-      handle_Close_FatherID={handle_Close_FatherID}
-      FatherID_Modal={FatherID_Modal}
-      handle_FatherID_Modal={handle_FatherID_Modal}
-      handle_FatherID_Upload={handleFatherIDUpload}
-      setFatherID={setFatherID}
-      fatherIDName={fatherIDName}
-      fatherID={fatherID}
+      handleReference={handleReference}
+      handle_Close_Reference={handle_Close_Reference}
+      Reference_Modal={Reference_Modal}
+      handle_Reference_Modal={handle_Reference_Modal}
+      handle_Reference_Upload={handleReferenceUpload}
+      setReference={setReference}
+      referenceName={referenceName}
+      reference={reference}
 
       handleStudentID={handleStudentID}
       handle_Close_StudentID={handle_Close_StudentID}

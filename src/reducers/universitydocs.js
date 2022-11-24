@@ -4,9 +4,10 @@ import {
   
   const INITIAL_STATE = {
     currentUser: {
-      transcriptPath:'',
+      alevel:'',
+      olevel:'',
       applicationPath:'',
-      fatherIDPath:'',
+      referencePath:'',
       studentIDPath:'',
       // submittedCrm:false
     }
