@@ -15,10 +15,9 @@ const Login = () =>{
       setLoading(true)
         try {
             console.log(email); 
-            navigate('/confirmation')
-            localStorage.setItem('user' , email )
             let result = await Auth.signIn(email);
             window.cognitoUser=result  
+            navigate('/confirmation')
           } 
           catch (error) {     
             try {

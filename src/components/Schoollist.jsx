@@ -1,5 +1,6 @@
 import { Formik } from 'formik'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import {
     Container,
@@ -11,7 +12,7 @@ import {
     Badge,
     Card, 
   } from 'react-bootstrap'
-
+  
   const schema = yup.object().shape({
   });
 const Schoollist =({
@@ -31,7 +32,7 @@ const Schoollist =({
     handleCollegeList,
     handleUniversityList,
 })=> {
-
+  const navigate = useNavigate()
   const schoolpush= localStorage.getItem('school')
    const collegepush= localStorage.getItem('college')
    const universitypush= localStorage.getItem('university')
@@ -124,7 +125,7 @@ const Schoollist =({
            getCollege(e)
          }}
         />
-         </Col>             
+         </Col>
      ))}      
              <div className='d-flex justify-content-end mt-4'>         
            <Button
@@ -141,8 +142,8 @@ const Schoollist =({
        </Formik>        
         )
       }
-     else {
-        return (
+      if( universitypush === "true"){
+        return(
           <Formik validationSchema={schema}
         // onSubmit={console.log('')}
          initialValues={{
@@ -169,7 +170,7 @@ const Schoollist =({
           //name={item}
           value={item}
           label={item}
-           // disabled={school.length==5}
+         // disabled={school.length==5}
          // value={item}
          onChange={(e) => {
            getUniversity(e)
@@ -190,6 +191,11 @@ const Schoollist =({
            </Form>
        )}
        </Formik>  
+        )
+      }
+      else{
+        return(
+        <h3> Please Select Any Option </h3>
         )
       }
     }) ()}   

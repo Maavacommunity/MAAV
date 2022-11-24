@@ -69,7 +69,7 @@ const Schoollist = () => {
     data.append('college', college)
     if (college.length===5) {
       console.log(data.get('college'))
-     navigate('/documents')
+     navigate('/college')
     } 
     if(college.length>5){
       addToast('Please Select only 5 colleges',
@@ -91,7 +91,7 @@ const Schoollist = () => {
     data.append('university', school)
     if (university.length===5) {
       console.log(data.get('university'))
-     navigate('/documents')
+     navigate('/university')
     } 
     if(university.length>5){
       addToast('Please Select only 5 universities',

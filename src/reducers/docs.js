@@ -5,6 +5,11 @@ import {
 const INITIAL_STATE = {
   currentUser: {
     transcriptPath:'',
+    applicationPath:'',
+    identityPath:'',
+    fatherIDPath:'',
+    certificatePath:'',
+    photoPath:'',
     submittedCrm:false
   }
 }

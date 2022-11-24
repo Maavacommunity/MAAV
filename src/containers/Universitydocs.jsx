@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import DocsComponent from '../components/Docs';
+import UniversitydocsComponent from '../components/Universitydocs';
 //import GradelistComponent from '../components/Gradelist'
 import { Auth } from 'aws-amplify'
 import axios from 'axios';
@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { sidebar_check } from '../actions/sidebar'
 
-const Docs = () => {
+const Universitydocs = () => {
   const [Transcript_Modal, set_Transcript_Modal] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [transcriptName, setTranscriptName] = useState('');
@@ -21,29 +21,19 @@ const Docs = () => {
   const handle_Close_Application = () => {set_Application_Modal(false)};
   const handle_Application_Modal = () => {set_Application_Modal(true)};
 
-  const [Identity_Modal, set_Identity_Modal] = useState(false);
-  const [identity, setIdentity] = useState('');
-  const [identityName, setIdentityName] = useState('');
-  const handle_Close_Identity = () => {set_Identity_Modal(false)};
-  const handle_Identity_Modal = () => {set_Identity_Modal(true)};
-
   const [FatherID_Modal, set_FatherID_Modal] = useState(false);
   const [fatherID, setFatherID] = useState('');
   const [fatherIDName, setFatherIDName] = useState('');
   const handle_Close_FatherID = () => {set_FatherID_Modal(false)};
   const handle_FatherID_Modal = () => {set_FatherID_Modal(true)};
 
-  const [Certificate_Modal, set_Certificate_Modal] = useState(false);
-  const [certificate, setCertificate] = useState('');
-  const [certificateName, setCertificateName] = useState('');
-  const handle_Close_Certificate = () => {set_Certificate_Modal(false)};
-  const handle_Certificate_Modal = () => {set_Certificate_Modal(true)};
+  const [StudentID_Modal, set_StudentID_Modal] = useState(false);
+  const [studentID, setStudentID] = useState('');
+  const [studentIDName, setStudentIDName] = useState('');
+  const handle_Close_StudentID = () => {set_StudentID_Modal(false)};
+  const handle_StudentID_Modal = () => {set_StudentID_Modal(true)};
 
-  const [Photo_Modal, set_Photo_Modal] = useState(false);
-  const [photo, setPhoto] = useState('');
-  const [photoName, setPhotoName] = useState('');
-  const handle_Close_Photo = () => {set_Photo_Modal(false)};
-  const handle_Photo_Modal = () => {set_Photo_Modal(true)};
+
   const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -68,29 +58,6 @@ const Docs = () => {
     setApplication(e.target.files[0])
     set_Application_Modal(false);
   }
-
-  const handleIdentityUpload = async (e) => {
-    console.log("handleIdentityUpload")
-    console.log(identity.name)
-    localStorage.setItem('identity', identity.name)
-  }
-
-  const handleIdentity = (e) => {    
-    setIdentity(e.target.files[0])
-    set_Identity_Modal(false);
-  }
-
-  const handleCertificateUpload = async (e) => {
-    console.log("handleCertificateUpload")
-    console.log(certificate.name)
-    localStorage.setItem('certificate',certificate.name)
-  }
-
-  const handleCertificate = (e) => {    
-    setCertificate(e.target.files[0])
-    set_Certificate_Modal(false);
-  }
-
   const handleFatherIDUpload = async (e) => {
     console.log("handleFatherIDUpload")
     console.log(fatherID.name)
@@ -102,16 +69,18 @@ const Docs = () => {
     set_FatherID_Modal(false);
   }
 
-  const handlePhotoUpload = async (e) => {
-    console.log("handlePhotoUpload")
-    console.log(photo.name)
-    localStorage.setItem('photo',photo.name)
+  
+  const handleStudentIDUpload = async (e) => {
+    console.log("handleStudentIDUpload")
+    console.log(studentID.name)
+    localStorage.setItem('studentId', studentID.name)
   }
 
-  const handlePhoto = (e) => {    
-    setPhoto(e.target.files[0])
-    set_Photo_Modal(false);
+  const handleStudentID = (e) => {    
+    setStudentID(e.target.files[0])
+    set_StudentID_Modal(false);
   }
+ 
 
   const handleSubmit = async (e) => {    
         let session = await Auth.currentSession();        
@@ -128,7 +97,7 @@ const Docs = () => {
 
   return (
    
-    <DocsComponent 
+    <UniversitydocsComponent 
       handleTranscript={handleTranscript}
       handle_Close_Transcript={handle_Close_Transcript}
       Transcript_Modal={Transcript_Modal}
@@ -147,15 +116,6 @@ const Docs = () => {
       applicationName={applicationName}
       application={application}
 
-      handleIdentity={handleIdentity}
-      handle_Close_Identity={handle_Close_Identity}
-      Identity_Modal={Identity_Modal}
-      handle_Identity_Modal={handle_Identity_Modal}
-      handle_Identity_Upload={handleIdentityUpload}
-      setIdentity={setIdentity}
-      identityName={identityName}
-      identity={identity}
-
       handleFatherID={handleFatherID}
       handle_Close_FatherID={handle_Close_FatherID}
       FatherID_Modal={FatherID_Modal}
@@ -165,27 +125,19 @@ const Docs = () => {
       fatherIDName={fatherIDName}
       fatherID={fatherID}
 
-      handleCertificate={handleCertificate}
-      handle_Close_Certificate={handle_Close_Certificate}
-      Certificate_Modal={Certificate_Modal}
-      handle_Certificate_Modal={handle_Certificate_Modal}
-      handle_Certificate_Upload={handleCertificateUpload}
-      setCertificate={setCertificate}
-      certificateName={certificateName}
-      certificate={certificate}
+      handleStudentID={handleStudentID}
+      handle_Close_StudentID={handle_Close_StudentID}
+      StudentID_Modal={StudentID_Modal}
+      handle_StudentID_Modal={handle_StudentID_Modal}
+      handle_StudentID_Upload={handleStudentIDUpload}
+      setStudentID={setStudentID}
+      studentIDName={studentIDName}
+      studentID={studentID}
 
-      handlePhoto={handlePhoto}
-      handle_Close_Photo={handle_Close_Photo}
-      Photo_Modal={Photo_Modal}
-      handle_Photo_Modal={handle_Photo_Modal}
-      handle_Photo_Upload={handlePhotoUpload}
-      setPhoto={setPhoto}
-      photoName={photoName}
-      photo={photo}
-
+  
       handleSubmit={handleSubmit}
     />
   )
 }
 
-export default Docs
+export default Universitydocs

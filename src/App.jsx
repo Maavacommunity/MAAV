@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
+import awsmobile  from './constants/aws-exports'
 import { Container } from 'react-bootstrap';
 import { ToastProvider } from 'react-toast-notifications'
 import Login from './pages/Auth/Login';
@@ -14,13 +15,18 @@ import FirstView from './containers/firstview'
 import ProtectedRoute from './helpers/ProtectedRoute'
 import NonProtectedRoute from './helpers/NonProtectedRoute'
 import Preloader from './components/Preloader';
+
 import Sidebar from './components/Sidebar';
 import Profile from './pages/Profile';
-import Docs from './pages/Docs'
+import Docs from './pages/Docs';
+import Collegedocs from './pages/Collegedocs';
+import Universitydocs from './pages/Universitydocs';
 import Application from './pages/Application'
 import Schoollist from './pages/Schoollist';
 import Gradelist from './pages/Gradelist';
 import './App.css'
+
+Amplify.configure({...awsmobile,authenticationFlowType: 'CUSTOM_AUTH'})
 function App () {
   return (
     <Fragment>
@@ -38,6 +44,9 @@ function App () {
               <Route path='/documents' element={<React.Fragment><Docs /></React.Fragment>} />
               <Route path='/list' element={<React.Fragment><Schoollist /></React.Fragment>} />
               <Route path='/grade' element={<React.Fragment><Gradelist /></React.Fragment>} />
+              <Route path='/college' element={<React.Fragment><Collegedocs /></React.Fragment>} />
+              <Route path='/university' element={<React.Fragment><Universitydocs /></React.Fragment>} />
+              
             </Routes>
             {/* <Preloader/> */}
             {/* <Toast /> */}
