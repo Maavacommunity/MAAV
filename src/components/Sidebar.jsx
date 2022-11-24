@@ -18,7 +18,7 @@ const Sidebar = ({
     logout,
 }) => {
   useEffect(() => {
-    console.log('check')
+    // console.log('check')
     
     }, [])
   const dispatch = useDispatch()

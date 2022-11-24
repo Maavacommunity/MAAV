@@ -14,24 +14,24 @@ const Application = () => {
     setSchool(true)
     setCollege(false)
     setUniversity(false)
-    console.log(school)
+   // console.log(school)
   }
   const handleCollege =async (e) => { 
     setCollege(true)
     setSchool(false)
     setUniversity(false)
-    console.log(college)
+   // console.log(college)
   }
   const handleUniversity =async (e) => { 
     setCollege(false)
     setSchool(false)
-    console.log(university)
+  //  console.log(university)
   }
 
 
   useEffect(()=>{
     if (school || college || university === true){
-      console.log(school)
+      //console.log(school)
       localStorage.setItem('school', JSON.stringify(school))
       localStorage.setItem('college',JSON.stringify (college))
       localStorage.setItem('university', JSON .stringify(university))

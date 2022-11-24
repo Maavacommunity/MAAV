@@ -11,6 +11,8 @@ const Schoollist = () => {
   const navigate = useNavigate()
   const { addToast } = useToasts()
   const [school , setSchool] = useState ([]);
+  const [college , setCollege] = useState ([]);
+  const [university , setUniversity] = useState ([]);
   const getSchool = (e) => {
     const {value , checked} = e.target
     if(checked){
@@ -20,36 +22,92 @@ const Schoollist = () => {
         setSchool(school.filter((e)=> e !== value))
     }
   }
-
-
+  const getCollege = (e) => {
+    const {value , checked} = e.target
+    if(checked){
+        setCollege([...college , value])
+    }
+    else{
+        setCollege(college.filter((e)=> e !== value))
+    }
+  }
+  const getUniversity = (e) => {
+    const {value , checked} = e.target
+    if(checked){
+        setUniversity([...university , value])
+    }
+    else{
+        setUniversity(university.filter((e)=> e !== value))
+    }
+  }
   // Handle Form Submission
-  const handleSubmit = (e) => {
+  const handleSchoolList = (e) => {
     e.preventDefault();
     const data = new FormData()
-    
     data.append('school', school)
-   
-    if (school.length==5) {
-     
+    if (school.length===5) {
       console.log(data.get('school'))
      navigate('/grade')
-    
     } 
     if(school.length>5){
-      addToast('Please Select only 5',
+      addToast('Please Select only 5 Schools',
       { appearance: 'error',
        autoDismiss: true}
        )
     }
      if(school.length<5) {
-      addToast('Please Select Atleast 5',
+      addToast('Please Select Atleast 5 schools',
       { appearance: 'error',
        autoDismiss: true}
        )
     }
   }
 
-  const List = [
+  const handleCollegeList = (e) => {
+    e.preventDefault();
+    const data = new FormData()
+    data.append('college', college)
+    if (college.length===5) {
+      console.log(data.get('college'))
+     navigate('/documents')
+    } 
+    if(college.length>5){
+      addToast('Please Select only 5 colleges',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
+    }
+     if(college.length<5) {
+      addToast('Please Select Atleast 5 colleges',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
+    }
+  }
+ 
+  const handleUniversityList = (e) => {
+    e.preventDefault();
+    const data = new FormData()
+    data.append('university', school)
+    if (university.length===5) {
+      console.log(data.get('university'))
+     navigate('/documents')
+    } 
+    if(university.length>5){
+      addToast('Please Select only 5 universities',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
+    }
+     if(university.length<5) {
+      addToast('Please Select Atleast 5 universities',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
+    }
+  }
+ 
+  const SchoolList = [
     'Groton Private School',
     'Philips Academy',
     'The City School',
@@ -66,12 +124,58 @@ const Schoollist = () => {
     'Habib Public School',
   ];
 
+  const CollegeList = [
+    'Massachusetts Institute of Technology (MIT)',
+    'St. Joseph’s College',
+    'Massachusetts Institute of Technology (MIT)',
+    'St. Joseph’s College',
+    'Massachusetts Institute of Technology (MIT)',
+    'St. Joseph’s College',
+    'Massachusetts Institute of Technology (MIT)',
+    'St. Joseph’s College',
+    'Massachusetts Institute of Technology (MIT)',
+    'St. Joseph’s College',
+    'Massachusetts Institute of Technology (MIT)',
+    'St. Joseph’s College',
+    
+  ];
+
+  const UniversityList = [
+    'University of Cambridge',
+    'Stanford University',
+    'Harvard University.',
+    'University of Oxford.',
+    'University of Washington Seattle.',
+    'Columbia University.',
+    'Oxford University' ,
+    'National University of Sciences and Technology (NUST)' ,
+    'University of Cambridge',
+    'Stanford University',
+    'Harvard University.',
+    'University of Oxford.',
+    'University of Washington Seattle.',
+    'Columbia University.',
+    'Oxford University' ,
+    'National University of Sciences and Technology (NUST)' ,
+    
+  ];
+  
   return (
     <SchoollistComponent 
-    List={List}
+    SchoolList={SchoolList}
     school={school}
     setSchool={setSchool}
-    handleSubmit={handleSubmit}
+    CollegeList={CollegeList}
+    college={college}
+    setCollege={setCollege}
+    getCollege={getCollege}
+    getUniversity={getUniversity}
+    UniversityList={UniversityList}
+    university={university}
+    setUniversity={setUniversity}
+    handleSchoolList={handleSchoolList}
+    handleCollegeList={handleCollegeList}
+    handleUniversityList={handleUniversityList}
     getSchool={getSchool}
     />
   )

@@ -49,7 +49,7 @@ const Docs = () => {
 	const navigate = useNavigate();
   
   const handleTranscriptUpload = async (e) => {
-    console.log("handlePassportUpload")
+    console.log("handleTranscriptUpload")
     console.log(transcript.name)
     localStorage.setItem('transcript', transcript.name)
   }
@@ -60,7 +60,7 @@ const Docs = () => {
   }
   
   const handleApplicationUpload = async (e) => {
-    console.log("handlePassportUpload")
+    console.log("handleApplicationUpload")
     console.log(application.name)
     localStorage.setItem('application', application.name)
   }
@@ -71,7 +71,7 @@ const Docs = () => {
   }
 
   const handleIdentityUpload = async (e) => {
-    console.log("handlePassportUpload")
+    console.log("handleIdentityUpload")
     console.log(identity.name)
     localStorage.setItem('identity', identity.name)
   }
@@ -82,7 +82,7 @@ const Docs = () => {
   }
 
   const handleCertificateUpload = async (e) => {
-    console.log("handlePassportUpload")
+    console.log("handleCertificateUpload")
     console.log(certificate.name)
     localStorage.setItem('certificate',certificate.name)
   }
@@ -93,7 +93,7 @@ const Docs = () => {
   }
 
   const handleFatherIDUpload = async (e) => {
-    console.log("handlePassportUpload")
+    console.log("handleFatherIDUpload")
     console.log(fatherID.name)
     localStorage.setItem('fatherId', fatherID.name)
   }
@@ -104,7 +104,7 @@ const Docs = () => {
   }
 
   const handlePhotoUpload = async (e) => {
-    console.log("handlePassportUpload")
+    console.log("handlePhotoUpload")
     console.log(photo.name)
     localStorage.setItem('photo',photo.name)
   }

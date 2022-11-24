@@ -47,7 +47,7 @@ import {
               onConfirmation()
             }
             initialValues={{
-              code: 123456
+              code: code
             }}
           >
             {({

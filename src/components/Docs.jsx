@@ -69,7 +69,7 @@ const Docs = ({
   
   const dispatch = useDispatch()
 	useEffect(() => {		
-		console.log('test')
+		// console.log('test')
 		}, []) 
 	
   return (

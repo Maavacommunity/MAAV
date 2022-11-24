@@ -13,64 +13,60 @@ import {
   } from 'react-bootstrap'
 
   const schema = yup.object().shape({
-    firstName: yup.string().required('Please input firstName'),
-    lastName: yup.string().required('Please input lastName'),
-    email: yup.string().email('Invalid email format').required('Please input your email'),
-    tel: yup.string().required('Please input your telephone number'),
   });
 const Schoollist =({
-    List,
+    SchoolList,
+    CollegeList,
+    college,
+    setCollege,
+    UniversityList,
+    university,
+    setUniversity,
     school,
     setSchool,
     getSchool,
-    handleSubmit
+    getUniversity,
+    getCollege,
+    handleSchoolList,
+    handleCollegeList,
+    handleUniversityList,
 })=> {
 
   const schoolpush= localStorage.getItem('school')
    const collegepush= localStorage.getItem('college')
    const universitypush= localStorage.getItem('university')
-
-  // Multi Checkbox
-  
-
   return (
     <Container fluid>
       <div className='pb-5'>
       {(() => {
         if (schoolpush === "true") {
           return (
-       
         <Formik validationSchema={schema}
          // onSubmit={console.log('')}
           initialValues={{
           }}
         >
         {({
-          
           handleChange,
           handleBlur,
           values,
           touched,
           errors,
         }) => (
-          
-            <Form noValidate onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSchoolList}>
             <Row className='d-flex mt-5'>
               <Col lg={3}>
                 <h4>List of Schools</h4>
                 <p>You can select any 5 Schools.</p>
               </Col>
             </Row>
-           
-      {List.map((item, index) => (
-        
+      {SchoolList.map((item, index) => ( 
          <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
          <Form.Check
            type='checkbox'
            //name={item}
            value={item}
            label={item}
-          
             // disabled={school.length==5}
           // value={item}
           onChange={(e) => {
@@ -90,7 +86,6 @@ const Schoollist =({
             </Button>
         </div>
             </Form>
-         
         )}
         </Formik>
       )} 
@@ -109,37 +104,29 @@ const Schoollist =({
          touched,
          errors,
        }) => (
-         
-           <Form noValidate onSubmit={handleSubmit}>
+           <Form noValidate onSubmit={handleCollegeList}>
            <Row className='d-flex mt-5'>
              <Col lg={3}>
-               <h4>List of Schools</h4>
-               <p>You can select any 5 Schools.</p>
+               <h4>List of Colleges</h4>
+               <p>You can select any 5 Colleges.</p>
              </Col>
            </Row>
-          
-     {/* {List.map((item, index) => (
-       
+     {CollegeList.map((item, index) => (
         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
         <Form.Check
           type='checkbox'
           //name={item}
           value={item}
           label={item}
-         
            // disabled={school.length==5}
          // value={item}
          onChange={(e) => {
-           getSchool(e)
+           getCollege(e)
          }}
         />
-         </Col>
-        
-      
-     ))} */}
-      
-             <div className='d-flex justify-content-end mt-4'>
-          
+         </Col>             
+     ))}      
+             <div className='d-flex justify-content-end mt-4'>         
            <Button
              className="d-flex justify-content-center align-items-center rounded-4"
              style={{minWidth:'150px'}}
@@ -149,15 +136,12 @@ const Schoollist =({
              Next step
            </Button>
        </div>
-           </Form>
-        
+           </Form>        
        )}
-       </Formik>
-        
+       </Formik>        
         )
       }
-
-      else {
+     else {
         return (
           <Formik validationSchema={schema}
         // onSubmit={console.log('')}
@@ -170,38 +154,30 @@ const Schoollist =({
          values,
          touched,
          errors,
-       }) => (
-         
-           <Form noValidate onSubmit={handleSubmit}>
+       }) => (       
+           <Form noValidate onSubmit={handleUniversityList}>
            <Row className='d-flex mt-5'>
              <Col lg={3}>
-               <h4>List of Schools</h4>
-               <p>You can select any 5 Schools.</p>
+               <h4>List of Universities</h4>
+               <p>You can select any 5 Universities.</p>
              </Col>
-           </Row>
-          
-     {/* {List.map((item, index) => (
-       
+           </Row>       
+           {UniversityList.map((item, index) => (
         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
         <Form.Check
           type='checkbox'
           //name={item}
           value={item}
           label={item}
-         
            // disabled={school.length==5}
          // value={item}
          onChange={(e) => {
-           getSchool(e)
+           getUniversity(e)
          }}
         />
-         </Col>
-        
-      
-     ))} */}
-      
-             <div className='d-flex justify-content-end mt-4'>
-          
+         </Col>            
+     ))}     
+       <div className='d-flex justify-content-end mt-4'>
            <Button
              className="d-flex justify-content-center align-items-center rounded-4"
              style={{minWidth:'150px'}}
@@ -212,20 +188,13 @@ const Schoollist =({
            </Button>
        </div>
            </Form>
-        
        )}
-       </Formik>
-        
+       </Formik>  
         )
       }
-    }) ()}
-        
+    }) ()}   
       </div>
     </Container>
-      
-        
-           
-   
   );
 }
 
