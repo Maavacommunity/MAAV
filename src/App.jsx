@@ -24,6 +24,7 @@ import Universitydocs from './pages/Universitydocs';
 import Application from './pages/Application'
 import Schoollist from './pages/Schoollist';
 import Gradelist from './pages/Gradelist';
+import Companylist from './pages/Companylist';
 import './App.css'
 
 Amplify.configure({...awsmobile,authenticationFlowType: 'CUSTOM_AUTH'})
@@ -46,6 +47,7 @@ function App () {
               <Route path='/grade' element={<React.Fragment><Gradelist /></React.Fragment>} />
               <Route path='/college' element={<React.Fragment><Collegedocs /></React.Fragment>} />
               <Route path='/university' element={<React.Fragment><Universitydocs /></React.Fragment>} />
+              <Route path='/international' element={<React.Fragment><Companylist /></React.Fragment>} />
               
             </Routes>
             {/* <Preloader/> */}

@@ -13,6 +13,7 @@ const Schoollist = () => {
   const [school , setSchool] = useState ([]);
   const [college , setCollege] = useState ([]);
   const [university , setUniversity] = useState ([]);
+  const [international , setInternational] = useState ([]);
   const getSchool = (e) => {
     const {value , checked} = e.target
     if(checked){
@@ -40,23 +41,28 @@ const Schoollist = () => {
         setUniversity(university.filter((e)=> e !== value))
     }
   }
+
+  const getInternational = (e) => {
+    const {value , checked} = e.target
+    if(checked){
+       const check = setInternational([...international , value])
+      //  localStorage.setItem('internationalcheck', JSON.stringify(check))
+    }
+    else{
+        setInternational(international.filter((e)=> e !== value))
+    }
+  }
   // Handle Form Submission
   const handleSchoolList = (e) => {
     e.preventDefault();
     const data = new FormData()
     data.append('school', school)
-    if (school.length===5) {
+    if (school.length<=5) {
       console.log(data.get('school'))
      navigate('/grade')
     } 
     if(school.length>5){
       addToast('Please Select only 5 Schools',
-      { appearance: 'error',
-       autoDismiss: true}
-       )
-    }
-     if(school.length<5) {
-      addToast('Please Select Atleast 5 schools',
       { appearance: 'error',
        autoDismiss: true}
        )
@@ -67,7 +73,7 @@ const Schoollist = () => {
     e.preventDefault();
     const data = new FormData()
     data.append('college', college)
-    if (college.length===5) {
+    if (college.length<=5) {
       console.log(data.get('college'))
      navigate('/college')
     } 
@@ -77,19 +83,14 @@ const Schoollist = () => {
        autoDismiss: true}
        )
     }
-     if(college.length<5) {
-      addToast('Please Select Atleast 5 colleges',
-      { appearance: 'error',
-       autoDismiss: true}
-       )
-    }
+    
   }
  
   const handleUniversityList = (e) => {
     e.preventDefault();
     const data = new FormData()
-    data.append('university', school)
-    if (university.length===5) {
+    data.append('university', university)
+    if (university.length<=5) {
       console.log(data.get('university'))
      navigate('/university')
     } 
@@ -99,8 +100,19 @@ const Schoollist = () => {
        autoDismiss: true}
        )
     }
-     if(university.length<5) {
-      addToast('Please Select Atleast 5 universities',
+  }
+
+  const handleInternationalList = (e) => {
+    e.preventDefault();
+    const data = new FormData()
+    data.append('international', international)
+    if (international) {
+      localStorage.setItem('internationalcheck',JSON.stringify(international))
+      
+     navigate('/international')
+    } 
+    if(international.length > 5){
+      addToast('Please Select only 5 Countries',
       { appearance: 'error',
        autoDismiss: true}
        )
@@ -159,6 +171,17 @@ const Schoollist = () => {
     'National University of Sciences and Technology (NUST)' ,
     
   ];
+
+  const CountryList = [
+    'Uk',
+    'Australia',
+    'US',
+    'Canada',
+    'Sweden',
+    'Germany',
+    'China',
+    
+  ];
   
   return (
     <SchoollistComponent 
@@ -173,9 +196,14 @@ const Schoollist = () => {
     UniversityList={UniversityList}
     university={university}
     setUniversity={setUniversity}
+    getInternational={getInternational}
+    CountryList={CountryList}
+    international={international}
+    setInternational={setInternational}
     handleSchoolList={handleSchoolList}
     handleCollegeList={handleCollegeList}
     handleUniversityList={handleUniversityList}
+    handleInternationalList={handleInternationalList}
     getSchool={getSchool}
     />
   )

@@ -18,6 +18,9 @@ import {
 const Schoollist =({
     SchoolList,
     CollegeList,
+    CountryList,
+    international,
+    setInternational,
     college,
     setCollege,
     UniversityList,
@@ -28,14 +31,17 @@ const Schoollist =({
     getSchool,
     getUniversity,
     getCollege,
+    getInternational,
     handleSchoolList,
     handleCollegeList,
     handleUniversityList,
+    handleInternationalList,
 })=> {
   const navigate = useNavigate()
   const schoolpush= localStorage.getItem('school')
    const collegepush= localStorage.getItem('college')
    const universitypush= localStorage.getItem('university')
+   const internationalpush= localStorage.getItem('international')
   return (
     <Container fluid>
       <div className='pb-5'>
@@ -193,9 +199,64 @@ const Schoollist =({
        </Formik>  
         )
       }
-      else{
+      if( internationalpush === "true"){
         return(
-        <h3> Please Select Any Option </h3>
+          <Formik validationSchema={schema}
+          // onSubmit={console.log('')}
+           initialValues={{
+           }}
+         >
+         {({
+           handleChange,
+           handleBlur,
+           values,
+           touched,
+           errors,
+         }) => (       
+             <Form noValidate onSubmit={handleInternationalList}>
+             <Row className='d-flex mt-5'>
+               <Col lg={3}>
+                 <h4>List of Countries</h4>
+                 <p>Select A Country</p>
+               </Col>
+             </Row>       
+             {CountryList.map((item, index) => (
+          <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+          <Form.Check
+            type='checkbox'
+            //name={item}
+            value={item}
+            label={item}
+           // disabled={school.length==5}
+           // value={item}
+           onChange={(e) => {
+             getInternational(e)
+           }}
+          />
+           </Col>            
+       ))}     
+         <div className='d-flex justify-content-end mt-4'>
+             <Button
+               className="d-flex justify-content-center align-items-center rounded-4"
+               style={{minWidth:'150px'}}
+               variant="outline-dark"
+               type="submit"
+             >
+               Next step
+             </Button>
+         </div>
+             </Form>
+         )}
+         </Formik>  
+        )
+      }
+      else {
+        return(
+          <div> 
+            <h3> 
+              Please Select an Application Option
+            </h3>
+          </div>
         )
       }
     }) ()}   

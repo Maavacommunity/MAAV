@@ -20,6 +20,9 @@ import {
     university,
     setUniversity,
     handleUniversity,
+    international,
+    setInternational,
+    handleInternational,
   
   }) => {
    
@@ -39,7 +42,7 @@ import {
             </h2>
           </Row>
           <Row className='d-flex justify-content-center align-items-center mt-5 gap-3'>
-            <Col lg={3}
+            <Col lg={2}
             onClick={(e) => {
               // setSchool(true)
               handleSchool(e)
@@ -67,7 +70,7 @@ import {
                 </Card>
               </Link>
             </Col>
-            <Col lg={3} onClick={(e) => {
+            <Col lg={2} onClick={(e) => {
               // setSchool(true)
               handleCollege(e)
             }}>
@@ -94,7 +97,7 @@ import {
                 </Card>
               </Link>
             </Col>
-            <Col lg={3} onClick={(e) => {
+            <Col lg={2} onClick={(e) => {
               // setSchool(true)
               handleUniversity(e)
             }}>
@@ -119,6 +122,35 @@ import {
                   >
                   <img style={{width: '40%'}} src='/assets/images/university.png'/>
                   University
+                </Card>
+              </Link>
+            </Col>
+            <Col lg={2} onClick={(e) => {
+              // setSchool(true)
+              handleInternational(e)
+            }}>
+              <Link to='#' style={{
+                textDecoration: 'none',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'black',
+              }}
+               onClick={() => {
+                setInternational(true)
+              }}
+           >
+                <Card
+                  className='card-hover d-flex justify-content-center align-items-center border-0'
+                  style={{
+                    maxWidth: '150px',
+                    width: '100%',
+                    height: '150px',
+                  }}
+                  >
+                  <img style={{width: '40%'}} src='/assets/images/company.png'/>
+                  International <br/>
+                  Admissions
                 </Card>
               </Link>
             </Col>
