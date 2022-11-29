@@ -17,6 +17,7 @@ const Confirmation = () => {
   const phone = useSelector(state => state.auth.currentUser.phone )
   const onConfirmation = async() => {
     setLoading(true)
+    const postStatus=localStorage.getItem('postStatus')
    try {
       let response = await Auth.sendCustomChallengeAnswer(window.cognitoUser, code)      
       if (response.signInUserSession==null) {
@@ -30,7 +31,12 @@ const Confirmation = () => {
           appearance:'success',
           autoDismiss: true
         })
+        if(postStatus === 'true'){
+          navigate('/')
+        }
+        else{
         navigate('/overview')
+        }
       }
     } catch (error) {
       console.log(error)

@@ -591,6 +591,11 @@ h4
       color: #40B9FF !important;
     }
   }
+  .hover {
+    &:hover{
+      background-color: #CED4DA;
+    }
+  }
   
   .phone-wrapper{
     border: solid 1px #CED4DA;

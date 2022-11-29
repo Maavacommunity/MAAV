@@ -58,8 +58,8 @@ const Profile = ({
   }
 
  
-    const data = localStorage.getItem('userData');
-    console.log(data)
+    const data =JSON.parse(localStorage.getItem('userData'));
+    console.log(data.file)
     //const user_first_name = data.first_name;
 
    
@@ -95,7 +95,7 @@ const Profile = ({
         }}
         >Your Details</h4>
         <p>Please fill in all the fields in order to ensure a complete application.</p></Col>
-        {file ? 
+        {data.file ? 
         <Col
         className='d-flex flex-row-reverse'
         style={{
@@ -104,7 +104,7 @@ const Profile = ({
           marginRight:'3rem',
          
         }}>
-        <img src={file} className="p-2 profile"/>
+        <img src={data.file} className="p-2 profile"/>
         </Col>
         : <></>
       }

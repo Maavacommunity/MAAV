@@ -50,6 +50,20 @@ const Docs = () => {
   const handleTranscriptUpload = async (e) => {
     console.log("handleTranscriptUpload")
     console.log(transcript.name)
+    // try {      
+    //   let session = await Auth.currentSession();
+    //   let username=await session.getIdToken().payload.sub;
+    //   let path=username + "/" + "transcript.pdf"
+    //   const result = await Storage.put(path, transcript, {
+    //     contentType: transcript.type,
+    //   });
+    //   setTranscriptName(path);
+    //   console.log("upload done")
+      
+    // }
+    // catch(err){
+    //   console.log('err',err)
+    // }
     localStorage.setItem('transcript', transcript.name)
   }
 

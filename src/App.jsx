@@ -25,6 +25,7 @@ import Application from './pages/Application'
 import Schoollist from './pages/Schoollist';
 import Gradelist from './pages/Gradelist';
 import Companylist from './pages/Companylist';
+import Timeline from './pages/Timeline';
 import './App.css'
 
 Amplify.configure({...awsmobile,authenticationFlowType: 'CUSTOM_AUTH'})
@@ -38,7 +39,8 @@ function App () {
             <Routes>
               <Route path='/overview' element={<React.Fragment><FirstView /></React.Fragment>} />
               <Route path='/dashboard' element={<React.Fragment><ProtectedRoute><Dashboard /></ProtectedRoute></React.Fragment>} />
-              <Route path='/' element={<React.Fragment><Login /></React.Fragment>} />
+              <Route path='/login' element={<React.Fragment><Login /></React.Fragment>} />
+              <Route path='/' element={<React.Fragment><Timeline /></React.Fragment>} />
               <Route path='/confirmation' element={<React.Fragment><Confirmation /></React.Fragment>} />
               <Route path='/profile' element={<React.Fragment><Profile /></React.Fragment>} />
               <Route path='/application' element={<React.Fragment><Application /></React.Fragment>} />

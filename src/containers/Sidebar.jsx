@@ -20,13 +20,13 @@ const Sidebar = () => {
         autoDismiss: true
       })
     }
-    navigate('/')
+    navigate('/login')
   }
 
   const [pathname, setPathname] = useState(null);
   const path = useLocation()
   useEffect(() => {
-    if(path.pathname === '/' || path.pathname === '/' || path.pathname === '/login' || path.pathname === '/confirmation' || path.pathname === '/signup') {
+    if(path.pathname === '/login' || path.pathname === '/login' || path.pathname === '/login' || path.pathname === '/confirmation' || path.pathname === '/signup') {
       setPathname(false)
       // setSidebarShow(false)
     } else {
