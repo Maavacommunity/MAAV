@@ -1,11 +1,16 @@
-import react,{useState, useEffect} from 'react'
+import React,{useState,useRef, useEffect} from 'react'
 import { Formik } from 'formik'
+import Paper from '@mui/material/Paper';
+import { BottomNavigation } from '@mui/material'
+import { BottomNavigationAction } from '@mui/material'
 import { Auth } from 'aws-amplify'
 import {
     Container,
     Row,
     Col,
     Button,
+    Nav,
+    Navbar,
     Card,
     Form,
     Modal
@@ -23,39 +28,74 @@ import {
     text,
     setText,
     handleChange,
+    Account,
     file,
-    setFile
+    setFile,
+    timeline,
+    flag,
+    setFlag,
   
   }) => {
   const userpost=JSON.parse(localStorage.getItem('post'))
   //const userimg=JSON.parse(localStorage.getItem('image'))
-
+  const ref = useRef(null);
+  const [value, setValue] = React.useState(0);
+  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(0);
     useEffect(() => {
+      setHeight(ref.current.offsetHeight);
+    setWidth(ref.current.offsetWidth);
         document.body.classList.add('login-layout')
         return () => {
           document.body.classList.remove('login-layout')
         }
       }, [])
     return (
+      
         <Container fluid
         style={{marginTop:'-40px'}}>
           <Row style={{display: 'flex', justifyContent: 'center',}}>
-            <Col style={{
+         
+            <Col ref={ref} style={{
             position: 'relative',
             maxWidth: '800px',
             width: '100%',
             padding: '10px',
-            
           }}>
-            <h2> Timeline </h2>
+            <h2> Timeline  </h2>
+           
           <Col
           style={{
-           
             width: '100%',
             padding: '10px',
             backgroundColor:'rgba(227,227,227,255)'
           }}
         >
+        {/* <Paper sx={{width:'100%', position: 'fixed', bottom: 0 ,left:0, right:0 }} elevation={3}>
+    <BottomNavigation
+      showLabels
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+    >
+      
+      <BottomNavigationAction label="Recents" component={Link}
+        to="/overview"/>
+      <BottomNavigationAction label="Favorites"  />
+     
+    </BottomNavigation>
+  </Paper> */}
+         <Row style={{boxShadow:'rgb(191 191 191) 0px 4px 15px', position: 'fixed', bottom: '0',left :0, right:0, backgroundColor:'white' , padding:'3px'}}>
+            <Col  onClick={()=>timeline()} className={`${flag ? 'sign-focus text-primary' : 'sign-focus '}`} style={{ textAlign:'right', paddingRight:'100px' , borderRight:'1px solid black', cursor :'pointer'}}>
+              Timeline
+            </Col>
+           
+            <Col onClick={()=>Account()} className={`${flag ?  'sign-focus ' :'sign-focus text-primary'}`} style={{ paddingLeft:'100px' , cursor :'pointer'}}>
+             Account
+            </Col>
+            
+          </Row>
         <Form noValidate>
               <div style={{
                 width: '100%',
@@ -64,6 +104,7 @@ import {
                 padding:'10px',
                 justifyContent:'center',
                 boxShadow:'rgb(191 191 191) 0px 4px 10px',
+               
                 // height:'35px'
               }}
               className='left-block'>
@@ -88,7 +129,6 @@ import {
                     padding:'10px',
                     marginBottom:'0px'
                   }}>
-
                     type message
                 </p>
                 </Col>
@@ -97,7 +137,7 @@ import {
                 className='text-center'
                 style={{padding:'5px',
                 height:'35px'}}>
-                <Col
+                <Col className='hover'
                 style={{
                     borderRight:'1px solid black',
                     height:'35px'
@@ -113,7 +153,10 @@ import {
                         &nbsp; Ask 
                   </p>
                 </Col>
-                <Col>
+                <Col className='hover'
+                 style={{
+                  height:'35px'
+              }}>
                   <p style={{marginTop:'6px', cursor:'pointer'}}
                   onClick={
                     handle_Post_Modal
@@ -126,6 +169,84 @@ import {
                    </p>
                 </Col>
                 </Row>
+              </div>
+              <div style={{
+                width: '100%',
+                // height: '64px',
+                backgroundColor:'rgb(243, 242, 242)',
+                padding:'10px',
+                justifyContent:'center',
+                //boxShadow:'rgb(191 191 191) 0px 4px 10px',
+                marginTop:'10px'
+                // height:'35px'
+              }}
+             >
+                <Row className='px-3 w-100  rounded-5'>  
+                <h5
+                style={{
+                    padding:'10px',
+                    marginBottom:'0px'
+                  }}>
+                     <img src="/assets/images/user2.png" alt="user" 
+                    style={{
+                        width:'30px',
+                        height:'30px',
+                    }}/>
+                    &nbsp;
+                    Username
+                </h5>
+                
+                    </Row>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <div
+                style={{border:'1px lightgrey solid'}}>
+                <img src="/assets/images/timelinedummy.jpg" alt="user" 
+                style={{
+                    width:'100%',
+                    
+                }}/>
+               </div>
+              </div>
+              <div style={{
+                width: '100%',
+                // height: '64px',
+                backgroundColor:'rgb(243, 242, 242)',
+                padding:'10px',
+                justifyContent:'center',
+                //boxShadow:'rgb(191 191 191) 0px 4px 10px',
+                marginTop:'10px'
+                // height:'35px'
+              }}
+             >
+                <Row className='px-3 w-100  rounded-5'>  
+                <h5
+                style={{
+                    padding:'10px',
+                    marginBottom:'0px'
+                  }}>
+                     <img src="/assets/images/user2.png" alt="user" 
+                    style={{
+                        width:'30px',
+                        height:'30px',
+                    }}/>
+                    &nbsp;
+                    Username
+                </h5>
+                
+                    </Row>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <div
+                style={{border:'1px lightgrey solid'}}>
+                <img src="/assets/images/timelinedummy.jpg" alt="user" 
+                style={{
+                    width:'100%',
+                    
+                }}/>
+               </div>
               </div>
            
               {userpost && userpost.map((post) => (

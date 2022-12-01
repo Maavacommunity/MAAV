@@ -168,6 +168,13 @@ h4
     }
   }
   
+  @media (max-width: 550px) {
+    .navbar-container{
+      width: 450px !important;
+    }
+  }
+  
+  
   .imgOp{
     opacity: 0.2;
   }
@@ -573,7 +580,7 @@ h4
     margin: 4px 6px !important;
     border-radius: 4px;
     padding: 12px 0px;
-    font-weight: 800 !important;
+    
   }
   
   .sign-google{
@@ -625,4 +632,23 @@ h4
     border-radius: 4px;
     padding: 12px 0px;
     font-weight: 800 !important;
+  }
+
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
   }

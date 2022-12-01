@@ -18,6 +18,7 @@ const Timeline = () => {
   const [textarray, setTextarray] = useState([]);
   const [filearray, setFilearray] = useState([]);
   const [file, setFile] = useState('');
+  const [flag, setFlag] = useState(true)
   const handle_Close_Post = () => {set_Post_Modal(false)};
   const handle_Post_Modal = async() => {
     setPost(true)
@@ -58,6 +59,29 @@ const Timeline = () => {
   const handlePost = (e) => {    
     setFile(URL.createObjectURL(e.target.files[0]));
   }
+  const timeline = () => {    
+    setFlag(true)
+    navigate('/')
+  }
+  const Account = async() => {    
+    setFlag(false)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+     if (username){
+      navigate('/overview')
+     }
+     else{
+      navigate('/login')
+     }
+    }
+    
+    catch(err){
+      console.log('err',err)
+      navigate('/login')
+    }
+    
+  }
   
   const handleText = ()=>
   {
@@ -70,7 +94,7 @@ const Timeline = () => {
     localStorage.setItem('post', JSON.stringify(textarray))
     //localStorage.setItem('image',JSON.stringify(filearray))
     console.log(text)
-  navigate('/overview')
+  navigate('/')
   }
 
   return (
@@ -86,6 +110,10 @@ const Timeline = () => {
     setText={setText}
     file={file}
     setFile={setFile}
+    Account={Account}
+    flag={flag}
+    setFlag={setFlag}
+    timeline={timeline}
     />
   )
 }

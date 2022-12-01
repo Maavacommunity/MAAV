@@ -7,26 +7,27 @@ import SidebarComponent from '../components/Sidebar'
 const Sidebar = () => {
   const navigate = useNavigate()
   const { addToast } = useToasts()
-  const logOut = async() => {
-    try {
-      await Auth.signOut();
-      addToast('You have logged out successfully', {
-        appearance: 'success',
-        autoDismiss: true
-      })
-    } catch (error) {
-      addToast(error.message, {
-        appearance: 'error',
-        autoDismiss: true
-      })
-    }
+  const logout = async() => {
+    // try {
+    //   await Auth.signOut();
+    //   addToast('You have logged out successfully', {
+    //     appearance: 'success',
+    //     autoDismiss: true
+    //   })
+    // } catch (error) {
+    //   addToast(error.message, {
+    //     appearance: 'error',
+    //     autoDismiss: true
+    //   })
+    // }
+    sessionStorage.clear();
     navigate('/login')
   }
 
   const [pathname, setPathname] = useState(null);
   const path = useLocation()
   useEffect(() => {
-    if(path.pathname === '/login' || path.pathname === '/login' || path.pathname === '/login' || path.pathname === '/confirmation' || path.pathname === '/signup') {
+    if(path.pathname === '/' || path.pathname === '/login' || path.pathname === '/login' || path.pathname === '/confirmation' || path.pathname === '/signup') {
       setPathname(false)
       // setSidebarShow(false)
     } else {
@@ -36,10 +37,12 @@ const Sidebar = () => {
   }, [path.pathname]);
 
   return (
-   
-    <>
-      {pathname ? <SidebarComponent logout={logOut}/> : <></>}
-    </>
+   <SidebarComponent
+   logout={logout}
+   />
+    // <>
+    //   {pathname ? <SidebarComponent logout={logOut}/> : <></>}
+    // </>
   )
 }
 

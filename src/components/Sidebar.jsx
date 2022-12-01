@@ -15,8 +15,9 @@ import {
 // ]
 
 const Sidebar = ({
-    logout,
+  
 }) => {
+  
   useEffect(() => {
     // console.log('check')
     
@@ -29,15 +30,19 @@ const Sidebar = ({
   //const _progressValue = useSelector((state) => state.progress.progressValue)
   const sideData = useSelector((state) => state.sidebar)
   // const [sideData, setSideData] = useState(useSelector((state) => state.sidebar))
-
+  const signout=()=>{
+    localStorage.clear()
+    navigate('/')
+   }
   const router = (idx, check = 2, url = '') => {
     // if(check) {
       navigate(`/${url}`)
     // }
   }
-
+ 
   const handleClose = () => {
-    sidebar.current.style.width = '0px';
+    navigate('/')
+    // sidebar.current.style.width = '0px';
   }
   const handleOpen = () => {
     sidebar.current.style.width = '122px';
@@ -50,7 +55,16 @@ const Sidebar = ({
       </div>
       <div ref={sidebar} className='sidebar-container'>
         <div className='sidebar-wrapper'>
+        <div className='sidebar-close'>
+          <img style={{
+            width: '80%',
+            borderRadius: '50%',
+            }} src='/assets/images/left.png'
+            onClick={handleClose}
+          />
+        </div>
           <div className={`item home-link ${location.pathname === '/overview' ? 'white-bg' : ''}`} onClick={()=>{router(1, true, 'overview')}}>
+         
             <div>
               <img src='/assets/images/home.svg'  style={{ width: '22px'}}/>
             </div>
@@ -79,11 +93,13 @@ const Sidebar = ({
             })
           }  
           
-           <div className='log-out-img' onClick={()=>logout()}>
-           <Link to="/"
-           >  
-            <img src='/assets/images/log-out.svg'/>
-            </Link> 
+           <div className='log-out-img' onClick={()=>signout()}>
+           {/* <Link to="/"
+           style={{textDecoration:'none',
+          color:'black'}}
+           >   */}
+           SignOut
+            {/* </Link>  */}
           </div>
               
         </div>
@@ -92,14 +108,7 @@ const Sidebar = ({
           <div className='text1'>{_progressValue}%</div>
           <div>closer to your home financing</div>
         </div> */}
-        <div className='sidebar-close'>
-          <img style={{
-            width: '80%',
-            borderRadius: '50%',
-            }} src='/assets/images/left.png'
-            onClick={handleClose}
-          />
-        </div>
+       
       </div>
 
     </Fragment>
