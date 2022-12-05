@@ -68,7 +68,8 @@ import {
           style={{
             width: '100%',
             padding: '10px',
-            backgroundColor:'rgba(227,227,227,255)'
+            backgroundColor:'rgba(227,227,227,255)',
+            marginBottom:'50px'
           }}
         >
         {/* <Paper sx={{width:'100%', position: 'fixed', bottom: 0 ,left:0, right:0 }} elevation={3}>
@@ -86,7 +87,7 @@ import {
      
     </BottomNavigation>
   </Paper> */}
-         <Row style={{boxShadow:'rgb(191 191 191) 0px 4px 15px', position: 'fixed', bottom: '0',left :0, right:0, backgroundColor:'white' , padding:'3px'}}>
+         <Row style={{boxShadow:'rgb(191 191 191) 0px 4px 15px', position: 'fixed', bottom: '0',left :0, right:0, backgroundColor:'white' ,marginTop:'30px', padding:'3px'}}>
             <Col  onClick={()=>timeline()} className={`${flag ? 'sign-focus text-primary' : 'sign-focus '}`} style={{ textAlign:'right', paddingRight:'100px' , borderRight:'1px solid black', cursor :'pointer'}}>
               Timeline
             </Col>

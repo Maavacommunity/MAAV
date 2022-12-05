@@ -51,7 +51,6 @@ function App () {
               <Route path='/college' element={<React.Fragment><Collegedocs /></React.Fragment>} />
               <Route path='/university' element={<React.Fragment><Universitydocs /></React.Fragment>} />
               <Route path='/international' element={<React.Fragment><Companylist /></React.Fragment>} />
-              
             </Routes>
             {/* <Preloader/> */}
             {/* <Toast /> */}
