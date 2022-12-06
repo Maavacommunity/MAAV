@@ -39,10 +39,13 @@ const Sidebar = ({
       navigate(`/${url}`)
     // }
   }
+  const handleTimeline = () => {
+    navigate('/')
+   
+  }
  
   const handleClose = () => {
-    navigate('/')
-    // sidebar.current.style.width = '0px';
+    sidebar.current.style.width = '0px';
   }
   const handleOpen = () => {
     sidebar.current.style.width = '122px';
@@ -55,25 +58,26 @@ const Sidebar = ({
       </div>
       <div ref={sidebar} className='sidebar-container'>
         <div className='sidebar-wrapper'>
-        <div className='sidebar-close'>
-          <img style={{
-            width: '80%',
+        <div style={{textAlign:'center'}}>
+          <img className='sidebar-close' style={{
+            width: '60%',
             borderRadius: '50%',
             }} src='/assets/images/left.png'
-            onClick={handleClose}
+            onClick={handleTimeline}
           />
+          Timeline
         </div>
-          <div className={`item home-link ${location.pathname === '/overview' ? 'white-bg' : ''}`} onClick={()=>{router(1, true, 'overview')}}>
+          <div style={{justifyContent:'center' , }} className={`item home-link ${location.pathname === '/overview' ? 'white-bg' : ''}`} onClick={()=>{router(1, true, 'overview')}}>
          
             <div>
               <img src='/assets/images/home.svg'  style={{ width: '22px'}}/>
             </div>
           </div>
-          <div style={{ fontSize: '11px', color: '#666666' }}>Steps:</div>
+          <div style={{ fontSize: '11px', color: '#666666' , marginTop:'-30px' }}>Steps:</div>
           {
             sideData.map((item, idx) => {
               return (
-                <div key={idx} className={`item ${`/${item.name}` === location.pathname ? 'white-bg' : ''}`} onClick={()=> {router(idx+2, item.check, item.name)}}>
+                <div key={idx} style={{margin:'2 px', justifyContent:'center'}} className={`item ${`/${item.name}` === location.pathname ? 'white-bg' : ''}`} onClick={()=> {router(idx+2, item.check, item.name)}}>
                   <img
                     src={item.imgurl}
                     className={`${item.check ? 'imgOp' : ''}`}
@@ -93,22 +97,30 @@ const Sidebar = ({
             })
           }  
           
-           <div className='log-out-img' onClick={()=>signout()}>
-           {/* <Link to="/"
-           style={{textDecoration:'none',
-          color:'black'}}
-           >   */}
+           <div style={{padding:'18px',alignItems:'center', fontSize:'11px' ,  display:'flex' ,textAlign:'center', justifyContent:'center', flexDirection:'column' }} onClick={()=>signout()}>
+            <div>
+            <img src="/assets/images/log-out.svg" alt="" style={{width:"22px"}} />
+            <br/>
+            <p>
            SignOut
-            {/* </Link>  */}
+           </p>
+           </div>
           </div>
-              
+        <div>
+          <img className='sidebar-close' style={{
+            width: '100%',
+            borderRadius: '50%',
+            }} src='/assets/images/back.png'
+            onClick={handleClose}
+          />
+          Close
         </div>
         {/* <div className='sub-text'>
           <img src='/assets/images/persent.svg'/>
           <div className='text1'>{_progressValue}%</div>
           <div>closer to your home financing</div>
         </div> */}
-       
+       </div>
       </div>
 
     </Fragment>

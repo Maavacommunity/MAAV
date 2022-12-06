@@ -11,17 +11,18 @@ const Companylist = () => {
   const navigate = useNavigate()
   const { addToast } = useToasts()
   const [company , setCompany] = useState ();
+  
   const handleSubmit = async(e) => {
     e.preventDefault();
     // const data = new FormData()
     // data.append('grade', grade)
     if (company) {
-      console.log(company)
+   console.log(company)
       
       navigate('/documents')
     }
-    else {
-      console.log('error')
+    else{
+      console.error(  'error')
     }
   }
 

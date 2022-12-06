@@ -85,7 +85,7 @@
               </Row>
               {Uk.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
            <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -94,7 +94,7 @@
                 value="Company of Uk"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -104,7 +104,7 @@
                 value="Company of Uk"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>
@@ -112,7 +112,7 @@
             })}
              {US.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -121,7 +121,7 @@
                 value="Company of Us"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -131,7 +131,7 @@
                 value="Company of Us"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>
@@ -139,7 +139,7 @@
             })}
              {Australia.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -148,7 +148,7 @@
                 value="Company of Australia"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -158,7 +158,7 @@
                 value="Company of Australia"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>
@@ -167,7 +167,7 @@
 
         {Sweden.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -176,7 +176,7 @@
                 value="Company of Sweden"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -186,7 +186,7 @@
                 value="Company of Sweden"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>
@@ -194,7 +194,7 @@
             })}
              {Canada.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -203,7 +203,7 @@
                 value="Company of Canada"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -213,7 +213,7 @@
                 value="Company of Canada"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>
@@ -221,7 +221,7 @@
             })}
             {Germany.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -230,7 +230,7 @@
                 value="Company of Germany"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -240,7 +240,7 @@
                 value="Company of Germany"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>
@@ -248,7 +248,7 @@
             })}
             {China.map(obj => {
           return (
-            <div>
+            <div key='c1'>
                <Badge pill bg='secondary' style={{width:'5rem'}}>{obj}</Badge>{' '}
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
             <Form.Check 
@@ -257,7 +257,7 @@
                 value="Company of China"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                <div lg={12} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
@@ -267,7 +267,7 @@
                 value="Company of China"
                 name='group'
                 id='radio_1'
-                // onChange={(e) => setGrade(e.target.value)}
+                 onChange={(e) => setCompany(e.target.value)}
               />
                </div>
                </div>

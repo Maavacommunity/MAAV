@@ -92,7 +92,7 @@ import {
               Timeline
             </Col>
            
-            <Col onClick={()=>Account()} className={`${flag ?  'sign-focus ' :'sign-focus text-primary'}`} style={{ paddingLeft:'100px' , cursor :'pointer'}}>
+            <Col onClick={()=>Account()} className={`${flag ?  'sign-focus ' :'sign-focus text-primary'}`} style={{ paddingLeft:'70px' , cursor :'pointer'}}>
              Account
             </Col>
             
