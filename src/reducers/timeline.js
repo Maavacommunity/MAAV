@@ -4,7 +4,9 @@ import {
   
   const INITIAL_STATE = {
     currentUser: {
-      
+      postPath:'',
+      message:'',
+      username:''
     }
   }
   

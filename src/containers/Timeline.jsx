@@ -4,9 +4,13 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { useToasts } from 'react-toast-notifications'
 import TimelineComponent from '../components/Timeline'
+import ReactS3 from 'react-s3'
 import { timeline } from '../actions/timeline'
 import { useNavigate} from 'react-router-dom'
 import { Auth } from 'aws-amplify'
+import AWS from 'aws-sdk'
+import { Storage } from "aws-amplify";
+import { upload } from '@testing-library/user-event/dist/upload'
 const Timeline = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,7 +37,6 @@ const Timeline = () => {
       navigate('/login')
      }
     }
-    
     catch(err){
       console.log('err',err)
       navigate('/login')
@@ -43,21 +46,15 @@ const Timeline = () => {
     if (post === true){
       //console.log(school)
       localStorage.setItem('postStatus', JSON.stringify(post))
-     
     }
-   
   },[post])
-
-  
-  
   const handlePostUpload = async (e) => {
     console.log("handlePostUpload")
     console.log(post.name)
     //localStorage.setItem('Post', post.name)
   }
-
   const handlePost = (e) => {    
-    setFile(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
   }
   const timeline = () => {    
     setFlag(true)
@@ -75,27 +72,51 @@ const Timeline = () => {
       navigate('/login')
      }
     }
-    
     catch(err){
       console.log('err',err)
       navigate('/login')
     }
-    
   }
-  
-  const handleText = ()=>
+  const handleText = async ()=>
   {
-    console.log(file.name)
-    set_Post_Modal(false)
-    textarray.unshift({
-      text: text,
-      file: file})
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "post.jpg"
+      const result = await Storage.put(path, file, {
+        contentType: file.type,
+      });
+      setFile(file.name);
+      //dispatch(sidebar_check('docs'));
+      set_Post_Modal(false)
+      navigate('/')
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    }
+  //   console.log(file.name)
+  //   
+  //   textarray.unshift({
+  //     text: text,
+  //     file: file})
     
-    localStorage.setItem('post', JSON.stringify(textarray))
-    //localStorage.setItem('image',JSON.stringify(filearray))
-    console.log(text)
-  navigate('/')
-  }
+  //   localStorage.setItem('post', JSON.stringify(textarray))
+  //   //localStorage.setItem('image',JSON.stringify(filearray))
+  //   console.log(text)
+  // navigate('/')
+ 
+    
+   // let incomeData = {file_path:path}
+    //console.log(incomeData)
+    // const response = axios({
+    //   method: 'post',
+      // headers:{'x-access-token':session.accessToken.jwtToken},
+      // url: 'https://u1flyn3aqa.execute-api.eu-west-2.amazonaws.com/test/save_user_data',
+      // data: file.name,
+      // crossDomain: true
+    // });
 
   return (
     <TimelineComponent 

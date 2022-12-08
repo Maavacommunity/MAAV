@@ -6,6 +6,7 @@ import {
 import { Amplify } from 'aws-amplify';
 import awsmobile  from './constants/aws-exports'
 import { Container } from 'react-bootstrap';
+import * as AWS from 'aws-sdk'
 import { ToastProvider } from 'react-toast-notifications'
 import Login from './pages/Auth/Login';
 import Toast from './containers/Toast'
