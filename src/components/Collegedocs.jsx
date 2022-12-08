@@ -256,7 +256,7 @@ const Collegedocs = ({
           </Modal>
           <div style={{display:'flex', flexDirection:'column', alignItems:'flex-end', justifyContent:'space-between', marginTop:40 , marginRight:30 }}>
             {
-              transcript.name && application.name && fatherID.name && studentID.name
+              transcriptName && applicationName && fatherIDName && studentIDName
             ?
               <Link to='#'>
               <Button variant='outline-dark' size="lg" style={{borderRadius:'20px'}}  onClick={()=> {                    

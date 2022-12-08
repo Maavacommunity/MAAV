@@ -3,6 +3,7 @@ import DocsComponent from '../components/Docs';
 //import GradelistComponent from '../components/Gradelist'
 import { Auth } from 'aws-amplify'
 import axios from 'axios';
+import AWS from 'aws-sdk'
 import { Storage } from "aws-amplify";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -44,27 +45,28 @@ const Docs = () => {
   const [photoName, setPhotoName] = useState('');
   const handle_Close_Photo = () => {set_Photo_Modal(false)};
   const handle_Photo_Modal = () => {set_Photo_Modal(true)};
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 	const navigate = useNavigate();
 
   const handleTranscriptUpload = async (e) => {
     console.log("handleTranscriptUpload")
-    console.log(transcript.name)
-    // try {      
-    //   let session = await Auth.currentSession();
-    //   let username=await session.getIdToken().payload.sub;
-    //   let path=username + "/" + "transcript.pdf"
-    //   const result = await Storage.put(path, transcript, {
-    //     contentType: transcript.type,
-    //   });
-    //   setTranscriptName(path);
-    //   console.log("upload done")
+    // console.log(transcript.name)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "school_transcript.jpg"
+      const result = await Storage.put(path, transcript, {
+        contentType: transcript.type,
+      });
+      setTranscriptName(path);
+      console.log("upload done")
       
-    // }
-    // catch(err){
-    //   console.log('err',err)
-    // }
-    localStorage.setItem('transcript', transcript.name)
+    }
+    catch(err){
+      console.log('err',err)
+    }
+    // localStorage.setItem('transcript', transcript.name)
   }
 
   const handleTranscript = (e) => {    
@@ -74,8 +76,23 @@ const Docs = () => {
   
   const handleApplicationUpload = async (e) => {
     console.log("handleApplicationUpload")
-    console.log(application.name)
-    localStorage.setItem('application', application.name)
+   // console.log(application.name)
+    // localStorage.setItem('application', application.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "school_application.jpg"
+      const result = await Storage.put(path, application, {
+        contentType: application.type,
+      });
+      setApplicationName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleApplication = (e) => {    
@@ -85,8 +102,23 @@ const Docs = () => {
 
   const handleIdentityUpload = async (e) => {
     console.log("handleIdentityUpload")
-    console.log(identity.name)
-    localStorage.setItem('identity', identity.name)
+    //console.log(identity.name)
+    // localStorage.setItem('identity', identity.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "school_identity.jpg"
+      const result = await Storage.put(path, identity, {
+        contentType: identity.type,
+      });
+      setIdentityName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleIdentity = (e) => {    
@@ -96,8 +128,23 @@ const Docs = () => {
 
   const handleCertificateUpload = async (e) => {
     console.log("handleCertificateUpload")
-    console.log(certificate.name)
-    localStorage.setItem('certificate',certificate.name)
+   // console.log(certificate.name)
+    // localStorage.setItem('certificate',certificate.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "school_certificate.jpg"
+      const result = await Storage.put(path, certificate, {
+        contentType: certificate.type,
+      });
+      setCertificateName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleCertificate = (e) => {    
@@ -107,8 +154,23 @@ const Docs = () => {
 
   const handleFatherIDUpload = async (e) => {
     console.log("handleFatherIDUpload")
-    console.log(fatherID.name)
-    localStorage.setItem('fatherId', fatherID.name)
+   // console.log(fatherID.name)
+   setLoading(true)
+   try {      
+     let session = await Auth.currentSession();
+     let username=await session.getIdToken().payload.sub;
+     let path=username + "/" + "school_fatherID.jpg"
+     const result = await Storage.put(path, fatherID, {
+       contentType: fatherID.type,
+     });
+     setFatherIDName(path);
+    }
+  
+   catch(err){
+     console.log('err',err)
+   }
+   setLoading(false)
+   // localStorage.setItem('fatherId', fatherID.name)
   }
 
   const handleFatherID = (e) => {    
@@ -118,8 +180,23 @@ const Docs = () => {
 
   const handlePhotoUpload = async (e) => {
     console.log("handlePhotoUpload")
-    console.log(photo.name)
-    localStorage.setItem('photo',photo.name)
+    // console.log(photo.name)
+    // localStorage.setItem('photo',photo.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "school_photo.jpg"
+      const result = await Storage.put(path, photo, {
+        contentType: photo.type,
+      });
+      setPhotoName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handlePhoto = (e) => {    
@@ -196,6 +273,7 @@ const Docs = () => {
       setPhoto={setPhoto}
       photoName={photoName}
       photo={photo}
+      loading={loading}
 
       handleSubmit={handleSubmit}
     />

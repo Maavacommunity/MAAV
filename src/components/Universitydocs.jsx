@@ -310,7 +310,7 @@ const Universitydocs = ({
           </Modal>
           <div style={{display:'flex', flexDirection:'column', alignItems:'flex-end', justifyContent:'space-between', marginTop:40 , marginRight:30 }}>
             {
-              alevel.name && olevel.name && application.name && reference.name && studentID.name
+              alevelName && olevelName && applicationName && referenceName && studentIDName
             ?
               <Link to='#'>
               <Button variant='outline-dark' size="lg" style={{borderRadius:'20px'}}  onClick={()=> {                    

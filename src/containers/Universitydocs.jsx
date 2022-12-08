@@ -38,15 +38,30 @@ const Universitydocs = () => {
   const [studentIDName, setStudentIDName] = useState('');
   const handle_Close_StudentID = () => {set_StudentID_Modal(false)};
   const handle_StudentID_Modal = () => {set_StudentID_Modal(true)};
-
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 	const navigate = useNavigate();
 
   const handleAlevelUpload = async (e) => {
     console.log("handleAlevelUpload")
-    console.log(alevel.name)
-    localStorage.setItem('alevel', alevel.name)
+    // console.log(alevel.name)
+    // localStorage.setItem('alevel', alevel.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "uni_alevel.jpg"
+      const result = await Storage.put(path, alevel, {
+        contentType: alevel.type,
+      });
+      setAlevelName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleAlevel = (e) => {    
@@ -56,8 +71,23 @@ const Universitydocs = () => {
   
   const handleOlevelUpload = async (e) => {
     console.log("handleOlevelUpload")
-    console.log(olevel.name)
-    localStorage.setItem('olevel', olevel.name)
+    // console.log(olevel.name)
+    // localStorage.setItem('olevel', olevel.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "uni_olevel.jpg"
+      const result = await Storage.put(path, olevel, {
+        contentType: olevel.type,
+      });
+      setOlevelName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleOlevel = (e) => {    
@@ -67,8 +97,23 @@ const Universitydocs = () => {
 
   const handleApplicationUpload = async (e) => {
     console.log("handleApplicationUpload")
-    console.log(application.name)
-    localStorage.setItem('application', application.name)
+    // console.log(application.name)
+    // localStorage.setItem('application', application.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "uni_application.jpg"
+      const result = await Storage.put(path, application, {
+        contentType: application.type,
+      });
+      setApplicationName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleApplication = (e) => {    
@@ -77,8 +122,23 @@ const Universitydocs = () => {
   }
   const handleReferenceUpload = async (e) => {
     console.log("handleReferenceUpload")
-    console.log(reference.name)
-    localStorage.setItem('reference', reference.name)
+    // console.log(reference.name)
+    // localStorage.setItem('reference', reference.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "uni_reference.jpg"
+      const result = await Storage.put(path, reference, {
+        contentType: reference.type,
+      });
+      setReferenceName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleReference = (e) => {    
@@ -89,8 +149,23 @@ const Universitydocs = () => {
   
   const handleStudentIDUpload = async (e) => {
     console.log("handleStudentIDUpload")
-    console.log(studentID.name)
-    localStorage.setItem('studentId', studentID.name)
+    // console.log(studentID.name)
+    // localStorage.setItem('studentId', studentID.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "uni_studentID.jpg"
+      const result = await Storage.put(path, studentID, {
+        contentType: studentID.type,
+      });
+      setStudentIDName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleStudentID = (e) => {    
@@ -159,6 +234,7 @@ const Universitydocs = () => {
       setStudentID={setStudentID}
       studentIDName={studentIDName}
       studentID={studentID}
+      loading={loading}
 
   
       handleSubmit={handleSubmit}

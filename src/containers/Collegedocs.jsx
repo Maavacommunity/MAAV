@@ -32,15 +32,30 @@ const Collegedocs = () => {
   const [studentIDName, setStudentIDName] = useState('');
   const handle_Close_StudentID = () => {set_StudentID_Modal(false)};
   const handle_StudentID_Modal = () => {set_StudentID_Modal(true)};
-
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 	const navigate = useNavigate();
 
   const handleTranscriptUpload = async (e) => {
     console.log("handleTranscriptUpload")
-    console.log(transcript.name)
-    localStorage.setItem('transcript', transcript.name)
+    // console.log(transcript.name)
+    // localStorage.setItem('transcript', transcript.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "college_transcript.jpg"
+      const result = await Storage.put(path, transcript, {
+        contentType: transcript.type,
+      });
+      setTranscriptName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleTranscript = (e) => {    
@@ -50,8 +65,23 @@ const Collegedocs = () => {
   
   const handleApplicationUpload = async (e) => {
     console.log("handleApplicationUpload")
-    console.log(application.name)
-    localStorage.setItem('application', application.name)
+    // console.log(application.name)
+    // localStorage.setItem('application', application.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "college_application.jpg"
+      const result = await Storage.put(path, application, {
+        contentType: application.type,
+      });
+      setApplicationName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleApplication = (e) => {    
@@ -60,8 +90,23 @@ const Collegedocs = () => {
   }
   const handleFatherIDUpload = async (e) => {
     console.log("handleFatherIDUpload")
-    console.log(fatherID.name)
-    localStorage.setItem('fatherId', fatherID.name)
+    // console.log(fatherID.name)
+    // localStorage.setItem('fatherId', fatherID.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "college_fatherID.jpg"
+      const result = await Storage.put(path, fatherID, {
+        contentType: fatherID.type,
+      });
+      setFatherIDName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleFatherID = (e) => {    
@@ -72,8 +117,23 @@ const Collegedocs = () => {
   
   const handleStudentIDUpload = async (e) => {
     console.log("handleStudentIDUpload")
-    console.log(studentID.name)
-    localStorage.setItem('studentId', studentID.name)
+    // console.log(studentID.name)
+    // localStorage.setItem('studentId', studentID.name)
+    setLoading(true)
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "college_studentID.jpg"
+      const result = await Storage.put(path, studentID, {
+        contentType: studentID.type,
+      });
+      setStudentIDName(path);
+     }
+   
+    catch(err){
+      console.log('err',err)
+    }
+    setLoading(false)
   }
 
   const handleStudentID = (e) => {    
