@@ -14,7 +14,8 @@ import {
     Navbar,
     Card,
     Form,
-    Modal
+    Modal,
+    Spinner
   } from 'react-bootstrap'
   import { Link } from 'react-router-dom'
   
@@ -35,6 +36,7 @@ import {
     timeline,
     flag,
     setFlag,
+    loading,
   
   }) => {
   const userpost=JSON.parse(localStorage.getItem('post'))
@@ -367,7 +369,9 @@ import {
             </Modal.Footer>
             <Modal.Footer style={{border:'none', margin:'10px', display:'flex', padding:'0px',justifyContent:'center'}}>
               <Button style={{width:'100%'}} onClick={handleText}>
-                Post
+              
+              {loading && <Spinner animation='border' />}
+              &nbsp;&nbsp; &nbsp; Post
               </Button>
             </Modal.Footer>
           </Modal>

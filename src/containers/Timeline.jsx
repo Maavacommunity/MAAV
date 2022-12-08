@@ -22,6 +22,7 @@ const Timeline = () => {
   const [textarray, setTextarray] = useState([]);
   const [filearray, setFilearray] = useState([]);
   const [file, setFile] = useState('');
+  const [loading, setLoading]= useState(false);
   const [flag, setFlag] = useState(true)
   const handle_Close_Post = () => {set_Post_Modal(false)};
   const handle_Post_Modal = async() => {
@@ -79,6 +80,7 @@ const Timeline = () => {
   }
   const handleText = async ()=>
   {
+    setLoading(true)
     try {      
       let session = await Auth.currentSession();
       let username=await session.getIdToken().payload.sub;
@@ -89,12 +91,14 @@ const Timeline = () => {
       setFile(file.name);
       //dispatch(sidebar_check('docs'));
       set_Post_Modal(false)
+      
       navigate('/')
      }
    
     catch(err){
       console.log('err',err)
     }
+    setLoading(false)
     }
   //   console.log(file.name)
   //   
@@ -135,6 +139,7 @@ const Timeline = () => {
     flag={flag}
     setFlag={setFlag}
     timeline={timeline}
+    loading={loading}
     />
   )
 }
