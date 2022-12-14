@@ -4,7 +4,7 @@ import {
   
   const INITIAL_STATE = {
     currentUser: {
-      
+      schools:[]
     }
   }
   

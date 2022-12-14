@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     lastName:'',
     phoneNumber:'',
     birthDate:'',
+    userPath:''
   }
 }
 

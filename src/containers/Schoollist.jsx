@@ -6,6 +6,7 @@ import { useToasts } from 'react-toast-notifications'
 import SchoollistComponent from '../components/Schoollist'
 import { schoollist } from '../actions/schoollist'
 import { useNavigate} from 'react-router-dom'
+import { Auth } from 'aws-amplify'
 const Schoollist = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -53,11 +54,26 @@ const Schoollist = () => {
     }
   }
   // Handle Form Submission
-  const handleSchoolList = (e) => {
+  const handleSchoolList = async (e) => {
     e.preventDefault();
     const data = new FormData()
     data.append('school', school)
     if (school.length<=5) {
+      let session = await Auth.currentSession();    
+      try {    
+        //dispatch(profile(userData));      
+        const response = axios({
+          method: 'post',
+          headers:{'x-access-token':session.accessToken.jwtToken},
+          url: 'https://30ihetuol1.execute-api.eu-west-2.amazonaws.com/test/saveUserData',
+          data: school,
+          crossDomain: true
+        });
+        //dispatch(sidebar_check('profile'))      
+      }
+      catch (errors) {
+        console.log('errors', errors)
+      }
       console.log(data.get('school'))
      navigate('/grade')
     } 

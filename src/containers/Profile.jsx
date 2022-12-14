@@ -7,8 +7,8 @@ import ProfileComponent from '../components/Profile'
 import { sidebar_check } from '../actions/sidebar'
 import { profile } from '../actions/profile'
 import { Auth } from 'aws-amplify'
-import { useNavigate} from 'react-router-dom'
-
+import { Navigate, useNavigate} from 'react-router-dom'
+import { Storage } from 'aws-amplify'
 const Profile = () => {
   const dispatch = useDispatch()
   const { addToast } = useToasts()
@@ -24,35 +24,41 @@ const Profile = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [file , setFile] = useState('')
 
-  const userData = {    
-    first_name:firstName,
-    last_name:lastName,
-    email:currentEmail ? currentEmail : email,
-    phone_number:phoneNumber,
-    birth_date:birthDate.getUTCFullYear() + "-" + (birthDate.getUTCMonth() + 1) + "-" + birthDate.getUTCDate(),
-    file:file,
-  }
+  // const userData = {    
+  //   firstName:firstName,
+  //   last_name:lastName,
+  //   email:currentEmail ? currentEmail : email,
+  //   phone_number:phoneNumber,
+  //   birth_date:birthDate.getUTCFullYear() + "-" + (birthDate.getUTCMonth() + 1) + "-" + birthDate.getUTCDate(),
+  // }
   function handleProfile(e) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
 }
-  const handleData = async () => {
-    
-    console.log(userData)
-    localStorage.setItem("userData",JSON.stringify(userData))
-   
-    
-    {/*let session = await Auth.currentSession();    
-    try {    
-      dispatch(profile(userData));      
-      const response = axios({
-        method: 'post',
-        headers:{'x-access-token':session.accessToken.jwtToken},
-        url: 'https://u1flyn3aqa.execute-api.eu-west-2.amazonaws.com/test/save_user_data',
-        data: userData,
-        crossDomain: true
+  const handleData = async () => {   
+    try {      
+      let session = await Auth.currentSession();
+      let username=await session.getIdToken().payload.sub;
+      let path=username + "/" + "profile.jpg"
+      const result = await Storage.put(path, file, {
+        contentType: file.type,
       });
-      dispatch(sidebar_check('profile'))      
+      let userData = { first_name:firstName,
+        last_name:lastName,
+        email:currentEmail ? currentEmail : email,
+        phone_number:phoneNumber,
+        birth_date:birthDate.getUTCFullYear() + "-" + (birthDate.getUTCMonth() + 1) + "-" + birthDate.getUTCDate(),
+      user_Profile:path}
+    console.log(userData)
+    const response = axios({
+      method: 'post',
+      headers:{'x-access-token':session.accessToken.jwtToken},
+      url: 'https://30ihetuol1.execute-api.eu-west-2.amazonaws.com/test/saveUserData',
+      data: userData,
+      crossDomain: true
+    });
+      Navigate('/application')
+      //dispatch(sidebar_check('profile'))      
     }
     catch (errors) {
       console.log('errors', errors)
@@ -62,7 +68,7 @@ const Profile = () => {
     addToast('An error happened. Please try again.', {
       appearance:'error',
       autoDismiss:true
-    })*/}
+    })
   }
  
   return (
@@ -87,7 +93,7 @@ const Profile = () => {
       setBirthDate={setBirthDate}
       handleData={handleData}
       handleProfile={handleProfile}
-      userData={userData}
+      // userData={userData}
       currentEmail={currentEmail}
       setCurrentEmail={setCurrentEmail}
       setPhoneNumber={setPhoneNumber}

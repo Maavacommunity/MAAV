@@ -4,7 +4,10 @@ import Paper from '@mui/material/Paper';
 import { BottomNavigation } from '@mui/material'
 import { BottomNavigationAction } from '@mui/material'
 import { Auth } from 'aws-amplify'
-
+import fetch from '../helpers/methods'
+import {timelineAction} from '../actions/timeline'
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import {
     Container,
     Row,
@@ -39,20 +42,37 @@ import {
     loading,
   
   }) => {
-  const userpost=JSON.parse(localStorage.getItem('post'))
+ //const userpost=JSON.parse(localStorage.getItem('post'))
   //const userimg=JSON.parse(localStorage.getItem('image'))
   const ref = useRef(null);
   const [value, setValue] = React.useState(0);
   const [height, setHeight] = useState(0);
   const [width, setWidth] = useState(0);
+  const dispatch = useDispatch();
     useEffect(() => {
-      setHeight(ref.current.offsetHeight);
-    setWidth(ref.current.offsetWidth);
+      fetch()
+        .then(data => {
+          console.log(data)
+          // data=data.data.data;
+          // const imagePath =  data.imagePath;		
+          // const text = data.text;	 
+          // const payload = {
+          //   imagePath:imagePath,	
+          //   text:text,	
+          // }    
+        // dispatch(timelineAction(payload));      
+          //setSubmittedCrm(data.submitted_crm);
+        }
+        )
         document.body.classList.add('login-layout')
         return () => {
           document.body.classList.remove('login-layout')
         }
       }, [])
+  //     const reduxData = useSelector(state => state.timeline)
+  //     //console.log(reduxData) 
+	// const maav_imagePath = reduxData.currentUser.imagePath;
+  // const maav_text = reduxData.currentUser.text;
     return (
       
         <Container fluid
@@ -75,21 +95,6 @@ import {
             marginBottom:'50px'
           }}
         >
-        {/* <Paper sx={{width:'100%', position: 'fixed', bottom: 0 ,left:0, right:0 }} elevation={3}>
-    <BottomNavigation
-      showLabels
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-    >
-      
-      <BottomNavigationAction label="Recents" component={Link}
-        to="/overview"/>
-      <BottomNavigationAction label="Favorites"  />
-     
-    </BottomNavigation>
-  </Paper> */}
          <Row style={{boxShadow:'rgb(191 191 191) 0px 4px 15px', position: 'fixed', bottom: '0',left :0, right:0, backgroundColor:'white' ,marginTop:'30px', padding:'3px'}}>
             <Col  onClick={()=>timeline()} className={`${flag ? 'sign-focus text-primary' : 'sign-focus '}`} style={{ textAlign:'right', paddingRight:'100px' , borderRight:'1px solid black', cursor :'pointer'}}>
               Timeline
@@ -173,88 +178,7 @@ import {
                    </p>
                 </Col>
                 </Row>
-              </div>
-              <div style={{
-                width: '100%',
-                // height: '64px',
-                backgroundColor:'rgb(243, 242, 242)',
-                padding:'10px',
-                justifyContent:'center',
-                //boxShadow:'rgb(191 191 191) 0px 4px 10px',
-                marginTop:'10px'
-                // height:'35px'
-              }}
-             >
-                <Row className='px-3 w-100  rounded-5'>  
-                <h5
-                style={{
-                    padding:'10px',
-                    marginBottom:'0px'
-                  }}>
-                     <img src="/assets/images/user2.png" alt="user" 
-                    style={{
-                        width:'30px',
-                        height:'30px',
-                    }}/>
-                    &nbsp;
-                    Username
-                </h5>
-                
-                    </Row>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <div
-                style={{border:'1px lightgrey solid'}}>
-                <img src="/assets/images/timelinedummy.jpg" alt="user" 
-                style={{
-                    width:'100%',
-                    
-                }}/>
-               </div>
-              </div>
-              <div style={{
-                width: '100%',
-                // height: '64px',
-                backgroundColor:'rgb(243, 242, 242)',
-                padding:'10px',
-                justifyContent:'center',
-                //boxShadow:'rgb(191 191 191) 0px 4px 10px',
-                marginTop:'10px'
-                // height:'35px'
-              }}
-             >
-                <Row className='px-3 w-100  rounded-5'>  
-                <h5
-                style={{
-                    padding:'10px',
-                    marginBottom:'0px'
-                  }}>
-                     <img src="/assets/images/user2.png" alt="user" 
-                    style={{
-                        width:'30px',
-                        height:'30px',
-                    }}/>
-                    &nbsp;
-                    Username
-                </h5>
-                
-                    </Row>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <div
-                style={{border:'1px lightgrey solid'}}>
-                <img src="/assets/images/timelinedummy.jpg" alt="user" 
-                style={{
-                    width:'100%',
-                    
-                }}/>
-               </div>
-              </div>
-           
-              {userpost && userpost.map((post) => (
-                
+              </div> 
               <div style={{
                 width: '100%',
                 // height: '64px',
@@ -286,18 +210,18 @@ import {
                 
                     </Row>
                 <p>
-                    {post.text}
+                    {/* {maav_text} */}
                 </p>
                 <div
                 style={{border:'1px lightgrey solid'}}>
-                <img src={post.file} alt="user" 
+                {/* <img src={maav_imagePath && file} alt="user" 
                 style={{
                     width:'100%',
                     
-                }}/>
+                }}/> */}
                </div>
               </div>
-              ))}
+             
         </Form>
         </Col>
         </Col>

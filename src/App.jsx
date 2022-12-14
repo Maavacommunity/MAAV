@@ -16,7 +16,6 @@ import FirstView from './containers/firstview'
 import ProtectedRoute from './helpers/ProtectedRoute'
 import NonProtectedRoute from './helpers/NonProtectedRoute'
 import Preloader from './components/Preloader';
-
 import Sidebar from './components/Sidebar';
 import Profile from './pages/Profile';
 import Docs from './pages/Docs';
@@ -27,7 +26,6 @@ import Schoollist from './pages/Schoollist';
 import Gradelist from './pages/Gradelist';
 import Companylist from './pages/Companylist';
 import Timeline from './pages/Timeline';
-
 import './App.css'
 
 Amplify.configure({...awsmobile,authenticationFlowType: 'CUSTOM_AUTH'})

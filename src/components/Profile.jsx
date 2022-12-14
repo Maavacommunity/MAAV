@@ -21,7 +21,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import './style/profile.css';
 import { sidebar_check } from '../actions/sidebar'
 //import { progress_value } from '../actions/progress'
-import fetch from '../helpers/methods'
+import fetch from '../helpers/usermethods'
 import { profile } from '../actions/profile'
 
 const schema = yup.object().shape({
@@ -47,6 +47,7 @@ const Profile = ({
   setFile,
   handleProfile,
   setPhoneNumber,
+  setCurrentEmail,
   handleAlert
 }) => {
   const dispatch = useDispatch()
@@ -56,18 +57,46 @@ const Profile = ({
   const reset = () => {
       setSeed(Math.random());
   }
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+    .then(data => {
+      setCurrentEmail(data?.attributes?.email)
+    })
+    .catch(err => console.log(err))
+    fetch()
+    .then(data => {
+      data=data.data.data;
+      if (data.name === 'Invalid Session ID') {
+        Auth.signOut();
+        navigate('/login')
+      }
+      const first_name_c = data.first_name;
+      const last_name_c = data.last_name;
+      const phone_number_c = data.phone_number==="na"?null:data.phone_number;
+      const data_of_birth_c = data.birth_date;
+      const payload = {
+        firstName:first_name_c,
+        lastName:last_name_c,
+        phoneNumber:phone_number_c,
+        birthDate:data_of_birth_c,
+      }      
+      dispatch(profile(payload));
+      setFirstName(first_name_c);
+      setLastName(last_name_c);
+      setPhoneNumber(phone_number_c);
+    }
+    )
+    }, [])  
+  let reduxData = useSelector(state => state.profile)
+  const maav_first_name = reduxData.currentUser.firstName;
+  const maav_last_name = reduxData.currentUser.lastName;
+  const maav_phone_number = reduxData.currentUser.phoneNumber;
+  const maav_birth = reduxData.currentUser.birthDate;
+  
 
  
-    const data =JSON.parse(localStorage.getItem('userData'));
-    console.log(data&& data.file)
-    //const user_first_name = data.first_name;
-
-   
-    //const user_last_name= data.last_name;
-    // const user_email= data.email;
-    // const user_phonenumber= data.phone_number;
-    // const user_birthdate= data.birth_date;
-    // const user_file= data.file;
+    // const data =JSON.parse(localStorage.getItem('userData'));
+    // console.log(data&& data.file)
    
   return (
     <Container fluid>
@@ -135,8 +164,8 @@ const Profile = ({
                 <Form.Control 
                   type="text" 
                   name='firstName' 
-                  value={ firstName}
-                 //disabled={user_first_name ? true : false }
+                  value={ maav_first_name ? maav_first_name : firstName}
+                  disabled={maav_first_name }
                   onChange={
                     e => {handleChange(e)
                     setFirstName(e.target.value)
@@ -153,8 +182,8 @@ const Profile = ({
                 <Form.Control 
                   type="text" 
                   name='lastName'  
-                  value={ lastName}
-                  //disabled={user_last_name ? true : false}
+                  value={ maav_last_name ? maav_last_name : lastName}
+                  disabled={maav_last_name }
                   onChange={e => {handleChange(e);
                   setLastName(e.target.value)
                   }}
@@ -173,8 +202,8 @@ const Profile = ({
                   
                     type="email" 
                     name='email' 
-                    value={ email}
-                   // disabled={user_email ? true : false}
+                    value={currentEmail ? currentEmail : email}
+                    disabled={currentEmail ? true : false}
                     onChange={e => {
                       handleChange(e);
                       setEmail(e.target.value)
@@ -189,8 +218,8 @@ const Profile = ({
                 <Form.Label>Phone Number</Form.Label>
                 <PhoneInput
                   className='phone-number-input'
-                  value={  phoneNumber}
-                 // disabled={user_phonenumber ? true : false}
+                  value={phoneNumber ? phoneNumber : maav_phone_number}
+                  disabled={maav_phone_number}
                   type='tel'
                   placeholder="Enter phone number"
                   international
@@ -205,8 +234,8 @@ const Profile = ({
               <div style={{width:'100%'}}>
                 <Form.Label>Date of birth</Form.Label>
                 <DatePicker 
-                  value={ new Date()}
-                  //disabled={user_birthdate?true :false}
+                   value={maav_birth ? maav_birth : new Date()}
+                   disabled={maav_birth}
                  selected={birthDate} 
                   onChange={(date) => setBirthDate(date)}
                   peekNextMonth

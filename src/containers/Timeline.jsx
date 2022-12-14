@@ -10,7 +10,7 @@ import { useNavigate} from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import AWS from 'aws-sdk'
 import { Storage } from "aws-amplify";
-import { upload } from '@testing-library/user-event/dist/upload'
+
 const Timeline = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -55,7 +55,8 @@ const Timeline = () => {
     //localStorage.setItem('Post', post.name)
   }
   const handlePost = (e) => {    
-    setFile(e.target.files[0]);
+    //setFile (e.target.files[0]);
+    console.log(file)
   }
   const timeline = () => {    
     setFlag(true)
@@ -88,7 +89,17 @@ const Timeline = () => {
       const result = await Storage.put(path, file, {
         contentType: file.type,
       });
-      setFile(file.name);
+      let timeline = {imagePath:path,
+                          text:text,}
+    console.log(timeline)
+    const response = axios({
+      method: 'post',
+      headers:{'x-access-token':session.accessToken.jwtToken},
+      url: 'https://30ihetuol1.execute-api.eu-west-2.amazonaws.com/test/createPost',
+      data: timeline,
+      crossDomain: true
+    });
+      setFile(path);
       //dispatch(sidebar_check('docs'));
       set_Post_Modal(false)
       
@@ -112,15 +123,7 @@ const Timeline = () => {
   // navigate('/')
  
     
-   // let incomeData = {file_path:path}
-    //console.log(incomeData)
-    // const response = axios({
-    //   method: 'post',
-      // headers:{'x-access-token':session.accessToken.jwtToken},
-      // url: 'https://u1flyn3aqa.execute-api.eu-west-2.amazonaws.com/test/save_user_data',
-      // data: file.name,
-      // crossDomain: true
-    // });
+   
 
   return (
     <TimelineComponent 
