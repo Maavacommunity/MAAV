@@ -6,26 +6,57 @@ import { useToasts } from 'react-toast-notifications'
 import CompanylistComponent from '../components/Companylist'
 import { companylist } from '../actions/companylist'
 import { useNavigate} from 'react-router-dom'
+import { Auth } from 'aws-amplify'
 const Companylist = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { addToast } = useToasts()
-  const [company , setCompany] = useState ();
+  const [company , setCompany] = useState ([]);
   
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    // const data = new FormData()
-    // data.append('grade', grade)
-    if (company) {
-   console.log(company)
-      
-      navigate('/documents')
+  const getCompany = (e) => {
+    const {value , checked} = e.target
+    if(checked){
+        setCompany([...company , value])
     }
     else{
-      console.error(  'error')
+        setCompany(company.filter((e)=> e !== value))
     }
   }
-
+ 
+  const handleCompanyList  =async  (e) => {
+    e.preventDefault();
+    const data = new FormData()
+    data.append('company', company)
+    if (company.length<=5) {
+      let session = await Auth.currentSession();    
+      try {    
+        let companyData = { 
+          company:company
+        }
+      
+        //dispatch(profile(userData));      
+        const response = axios({
+          method: 'post',
+          headers:{'x-access-token':session.accessToken.jwtToken},
+          url: 'https://30ihetuol1.execute-api.eu-west-2.amazonaws.com/test/saveUserData',
+          data: companyData,
+          crossDomain: true
+        });
+        //dispatch(sidebar_check('profile'))      
+      }
+      catch (errors) {
+        console.log('errors', errors)
+      }
+      console.log(data.get('company'))
+    
+    } 
+    if(company.length>5){
+      addToast('Please Select only 5 companies',
+      { appearance: 'error',
+       autoDismiss: true}
+       )
+    }
+  }
   const UkCompany = [
     'Company 1 of Uk',
     'Company 2 of Uk',
@@ -132,8 +163,9 @@ const Companylist = () => {
    AustraliaCompany={AustraliaCompany}
    company={company}
    setCompany={setCompany}
+   handleCompanyList={handleCompanyList}
   //getGrade={getGrade}
-   handleSubmit={handleSubmit}
+   getCompany={getCompany}
     />
   )
 }

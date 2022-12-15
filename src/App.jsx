@@ -23,9 +23,12 @@ import Collegedocs from './pages/Collegedocs';
 import Universitydocs from './pages/Universitydocs';
 import Application from './pages/Application'
 import Schoollist from './pages/Schoollist';
+import Collegelist from './pages/Collegelist';
+import Universitylist from './pages/Unilist';
 import Gradelist from './pages/Gradelist';
 import Companylist from './pages/Companylist';
 import Timeline from './pages/Timeline';
+import Countrylist from './pages/Countrylist'
 import './App.css'
 
 Amplify.configure({...awsmobile,authenticationFlowType: 'CUSTOM_AUTH'})
@@ -45,7 +48,10 @@ function App () {
               <Route path='/profile' element={<React.Fragment><Profile /></React.Fragment>} />
               <Route path='/application' element={<React.Fragment><Application /></React.Fragment>} />
               <Route path='/documents' element={<React.Fragment><Docs /></React.Fragment>} />
+              <Route path='/countrylist' element={<React.Fragment><Countrylist /></React.Fragment>} />
               <Route path='/list' element={<React.Fragment><Schoollist /></React.Fragment>} />
+              <Route path='/collegelist' element={<React.Fragment><Collegelist /></React.Fragment>} />
+              <Route path='/universitylist' element={<React.Fragment><Universitylist /></React.Fragment>} />
               <Route path='/grade' element={<React.Fragment><Gradelist /></React.Fragment>} />
               <Route path='/college' element={<React.Fragment><Collegedocs /></React.Fragment>} />
               <Route path='/university' element={<React.Fragment><Universitydocs /></React.Fragment>} />

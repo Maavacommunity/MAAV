@@ -1,46 +1,44 @@
-
-  import { Formik } from 'formik'
-  import { useState, useEffect } from 'react';
-  import * as yup from 'yup'
-  import fetch from '../helpers/usermethods'
-  import { countrylist } from '../actions/countrylist'
-  import { useDispatch, useSelector } from 'react-redux'
-  import {
-      Container,
-      Row,
-      Col,
-      Form,
-      InputGroup,
-      Button,
-      Input,
-      Label,
-      Badge,
-      Card, 
-    } from 'react-bootstrap'
+import { Formik } from 'formik'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup'
+import fetch from '../helpers/usermethods'
+import { collegelist } from '../actions/collegelist'
+import { countrylist } from '../actions/countrylist'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    InputGroup,
+    Button,
+    Badge,
+    Card, 
+  } from 'react-bootstrap'
   
-    const schema = yup.object().shape({
-      firstName: yup.string().required('Please input firstName'),
-      lastName: yup.string().required('Please input lastName'),
-      email: yup.string().email('Invalid email format').required('Please input your email'),
-      tel: yup.string().required('Please input your telephone number'),
-    });
-  const Companylist =({
-      company,
-      UkCompany,
-      UsCompany,
-      SwedenCompany,
-      ChinaCompany,
-      CanadaCompany,
-      AustraliaCompany,
-      GermanyCompany,
-      setCountry,
-      country,
-      setCompany,
-      getCompany,
-      handleSubmit,
-      handleCompanyList,
-  })=> {
-    const dispatch = useDispatch()
+  const schema = yup.object().shape({
+  });
+const Collegelist =({
+    CollegeList,
+    college,
+    setCollege,
+    getCollege,
+    handleCollegeList,
+    UkCollege,
+    UsCollege,
+    SwedenCollege,
+    ChinaCollege,
+    CanadaCollege,
+    AustraliaCollege,
+    GermanyCollege,
+})=> {
+  const navigate = useNavigate()
+  const schoolpush= localStorage.getItem('school')
+   const collegepush= localStorage.getItem('college')
+   const universitypush= localStorage.getItem('university')
+   const internationalpush= localStorage.getItem('international')
+   const dispatch = useDispatch()
     useEffect(() => {
       fetch()
       .then(data => {
@@ -48,19 +46,18 @@
         const country = data.country;
         const payload = {
           country:country,
+          
         }      
         dispatch(countrylist(payload));
       }
       )
       }, [])  
       let reduxData = useSelector(state => state.countrylist)  
-      const usercountry = reduxData.currentUser.country;
-          console.log(usercountry)
-         
+ const usercountry = reduxData.currentUser.country;
+     console.log(usercountry)
     
-    
-    return (
-      <Container fluid>
+  return (
+    <Container fluid>
       <div className='pb-5'>
       {(() => {
         if (usercountry === "Australia") {
@@ -71,30 +68,31 @@
           }}
         >
         {({
+          
           handleChange,
           handleBlur,
           values,
           touched,
           errors,
         }) => (
-            <Form noValidate onSubmit={handleCompanyList}>
+            <Form noValidate onSubmit={handleCollegeList}>
             <Row className='d-flex mt-5'>
               <Col lg={3}>
-                <h4>List of Companies</h4>
-                <p>You can select any 5 Companies.</p>
+                <h4>List of Schools</h4>
+                <p>You can select any 5 Schools.</p>
               </Col>
             </Row>
-            {AustraliaCompany.map((item, index) => ( 
+            {AustraliaCollege.map((item, index) => ( 
          <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
          <Form.Check
            type='checkbox'
            //name={item}
            value={item}
            label={item}
-            // disabled={Company.length==5}
+            // disabled={College.length==5}
           // value={item}
           onChange={(e) => {
-            getCompany(e)
+            getCollege(e)
           }}
          />
           </Col>
@@ -130,24 +128,24 @@
         touched,
         errors,
       }) => (
-          <Form noValidate onSubmit={handleCompanyList}>
+          <Form noValidate onSubmit={handleCollegeList}>
           <Row className='d-flex mt-5'>
             <Col lg={3}>
-              <h4>List of Companies</h4>
-              <p>You can select any 5 Companies.</p>
+              <h4>List of Colleges</h4>
+              <p>You can select any 5 Colleges.</p>
             </Col>
           </Row>
-          {UkCompany.map((item, index) => ( 
+          {UkCollege.map((item, index) => ( 
        <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
        <Form.Check
          type='checkbox'
          //name={item}
          value={item}
          label={item}
-          // disabled={Company.length==5}
+          // disabled={College.length==5}
         // value={item}
         onChange={(e) => {
-          getCompany(e)
+          getCollege(e)
         }}
        />
         </Col>
@@ -160,7 +158,7 @@
             variant="outline-dark"
             type="submit"
             onClick={() => {
-              handleCompanyList()
+              handleCollegeList()
             }}
           >
             Next step
@@ -186,24 +184,24 @@
       touched,
       errors,
     }) => (
-        <Form noValidate onSubmit={handleCompanyList}>
+        <Form noValidate onSubmit={handleCollegeList}>
         <Row className='d-flex mt-5'>
           <Col lg={3}>
-            <h4>List of Companies</h4>
-            <p>You can select any 5 Companies.</p>
+            <h4>List of Colleges</h4>
+            <p>You can select any 5 Colleges.</p>
           </Col>
         </Row>
-        {SwedenCompany.map((item, index) => ( 
+        {SwedenCollege.map((item, index) => ( 
      <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
      <Form.Check
        type='checkbox'
        //name={item}
        value={item}
        label={item}
-        // disabled={Company.length==5}
+        // disabled={College.length==5}
       // value={item}
       onChange={(e) => {
-        getCompany(e)
+        getCollege(e)
       }}
      />
       </Col>
@@ -216,7 +214,7 @@
           variant="outline-dark"
           type="submit"
           onClick={() => {
-            handleCompanyList()
+            handleCollegeList()
           }}
         >
           Next step
@@ -242,24 +240,24 @@
     touched,
     errors,
   }) => (
-      <Form noValidate onSubmit={handleCompanyList}>
+      <Form noValidate onSubmit={handleCollegeList}>
       <Row className='d-flex mt-5'>
         <Col lg={3}>
-          <h4>List of Companies</h4>
-          <p>You can select any 5 Companies.</p>
+          <h4>List of Colleges</h4>
+          <p>You can select any 5 Colleges.</p>
         </Col>
       </Row>
-      {ChinaCompany.map((item, index) => ( 
+      {ChinaCollege.map((item, index) => ( 
    <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
    <Form.Check
      type='checkbox'
      //name={item}
      value={item}
      label={item}
-      // disabled={Company.length==5}
+      // disabled={College.length==5}
     // value={item}
     onChange={(e) => {
-      getCompany(e)
+      getCollege(e)
     }}
    />
     </Col>
@@ -272,7 +270,7 @@
         variant="outline-dark"
         type="submit"
         onClick={() => {
-          handleCompanyList()
+          handleCollegeList()
         }}
       >
         Next step
@@ -298,24 +296,24 @@
           touched,
           errors,
         }) => (
-            <Form noValidate onSubmit={handleCompanyList}>
+            <Form noValidate onSubmit={handleCollegeList}>
             <Row className='d-flex mt-5'>
               <Col lg={3}>
-                <h4>List of Companies</h4>
-                <p>You can select any 5 Companies.</p>
+                <h4>List of Colleges</h4>
+                <p>You can select any 5 Colleges.</p>
               </Col>
             </Row>
-            {GermanyCompany.map((item, index) => ( 
+            {GermanyCollege.map((item, index) => ( 
         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
         <Form.Check
           type='checkbox'
           //name={item}
           value={item}
           label={item}
-            // disabled={Company.length==5}
+            // disabled={College.length==5}
           // value={item}
           onChange={(e) => {
-            getCompany(e)
+            getCollege(e)
           }}
         />
           </Col>
@@ -351,24 +349,24 @@
           touched,
           errors,
         }) => (
-            <Form noValidate onSubmit={handleCompanyList}>
+            <Form noValidate onSubmit={handleCollegeList}>
             <Row className='d-flex mt-5'>
               <Col lg={3}>
-                <h4>List of Companies</h4>
-                <p>You can select any 5 Companies.</p>
+                <h4>List of Colleges</h4>
+                <p>You can select any 5 Colleges.</p>
               </Col>
             </Row>
-            {UsCompany.map((item, index) => ( 
+            {UsCollege.map((item, index) => ( 
         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
         <Form.Check
           type='checkbox'
           //name={item}
           value={item}
           label={item}
-            // disabled={Company.length==5}
+            // disabled={College.length==5}
           // value={item}
           onChange={(e) => {
-            getCompany(e)
+            getCollege(e)
           }}
         />
           </Col>
@@ -405,24 +403,24 @@
           touched,
           errors,
         }) => (
-            <Form noValidate onSubmit={handleCompanyList}>
+            <Form noValidate onSubmit={handleCollegeList}>
             <Row className='d-flex mt-5'>
               <Col lg={3}>
-                <h4>List of Companies</h4>
-                <p>You can select any 5 Companies.</p>
+                <h4>List of Colleges</h4>
+                <p>You can select any 5 Colleges.</p>
               </Col>
             </Row>
-            {CanadaCompany.map((item, index) => ( 
+            {CanadaCollege.map((item, index) => ( 
         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
         <Form.Check
           type='checkbox'
           //name={item}
           value={item}
           label={item}
-            // disabled={Company.length==5}
+            // disabled={College.length==5}
           // value={item}
           onChange={(e) => {
-            getCompany(e)
+            getCollege(e)
           }}
         />
           </Col>
@@ -455,7 +453,7 @@
     }) ()}   
       </div>
     </Container>
-    );
-  }
-  
-  export default Companylist;
+  );
+}
+
+export default Collegelist;

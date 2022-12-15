@@ -11,6 +11,7 @@ import gradelist from './gradelist'
 import schoollist from './schoollist'
 import timeline from './timeline'
 import universitydocs from './universitydocs'
+import countrylist from './countrylist'
 
 const rootReducer = combineReducers({
   auth,
@@ -24,7 +25,7 @@ const rootReducer = combineReducers({
   schoollist,
   timeline,
   universitydocs,
-
+  countrylist,
 
 })
 

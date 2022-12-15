@@ -1,7 +1,11 @@
 import { Formik } from 'formik'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
+import fetch from '../helpers/usermethods'
+import { schoollist } from '../actions/schoollist'
+import { countrylist } from '../actions/countrylist'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     Container,
     Row,
@@ -17,39 +21,324 @@ import {
   });
 const Schoollist =({
     SchoolList,
-    CollegeList,
-    CountryList,
-    international,
-    setInternational,
-    college,
-    setCollege,
-    UniversityList,
-    university,
-    setUniversity,
     school,
     setSchool,
     getSchool,
-    getUniversity,
-    getCollege,
-    getInternational,
     handleSchoolList,
-    handleCollegeList,
-    handleUniversityList,
-    handleInternationalList,
+    UkSchool,
+    UsSchool,
+    SwedenSchool,
+    ChinaSchool,
+    CanadaSchool,
+    AustraliaSchool,
+    GermanySchool,
 })=> {
   const navigate = useNavigate()
   const schoolpush= localStorage.getItem('school')
    const collegepush= localStorage.getItem('college')
    const universitypush= localStorage.getItem('university')
    const internationalpush= localStorage.getItem('international')
+   const dispatch = useDispatch()
+    useEffect(() => {
+      fetch()
+      .then(data => {
+        data=data.data.data;
+        const country = data.country;
+        const payload = {
+          country:country,
+          
+        }      
+        dispatch(countrylist(payload));
+      }
+      )
+      }, [])  
+      let reduxData = useSelector(state => state.countrylist)  
+ const usercountry = reduxData.currentUser.country;
+     console.log(usercountry)
+    
   return (
     <Container fluid>
       <div className='pb-5'>
       {(() => {
-        if (schoolpush === "true") {
+        if (usercountry === "Australia") {
           return (
         <Formik validationSchema={schema}
          // onSubmit={console.log('')}
+          initialValues={{
+          }}
+        >
+        {({
+          
+          handleChange,
+          handleBlur,
+          values,
+          touched,
+          errors,
+        }) => (
+            <Form noValidate onSubmit={handleSchoolList}>
+            <Row className='d-flex mt-5'>
+              <Col lg={3}>
+                <h4>List of Schools</h4>
+                <p>You can select any 5 Schools.</p>
+              </Col>
+            </Row>
+            {AustraliaSchool.map((item, index) => ( 
+         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+         <Form.Check
+           type='checkbox'
+           //name={item}
+           value={item}
+           label={item}
+            // disabled={school.length==5}
+          // value={item}
+          onChange={(e) => {
+            getSchool(e)
+          }}
+         />
+          </Col>
+      ))}
+
+  <div className='d-flex justify-content-end mt-4'>
+            <Button
+              className="d-flex justify-content-center align-items-center rounded-4"
+              style={{minWidth:'150px'}}
+              variant="outline-dark"
+              type="submit"
+              
+            >
+              Next step
+            </Button>
+        </div>
+            </Form>
+        )}
+        </Formik>
+      )} 
+    if (usercountry === "UK") {
+        return (
+      <Formik validationSchema={schema}
+       // onSubmit={console.log('')}
+        initialValues={{
+        }}
+      >
+      {({
+        
+        handleChange,
+        handleBlur,
+        values,
+        touched,
+        errors,
+      }) => (
+          <Form noValidate onSubmit={handleSchoolList}>
+          <Row className='d-flex mt-5'>
+            <Col lg={3}>
+              <h4>List of Schools</h4>
+              <p>You can select any 5 Schools.</p>
+            </Col>
+          </Row>
+          {UkSchool.map((item, index) => ( 
+       <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+       <Form.Check
+         type='checkbox'
+         //name={item}
+         value={item}
+         label={item}
+          // disabled={school.length==5}
+        // value={item}
+        onChange={(e) => {
+          getSchool(e)
+        }}
+       />
+        </Col>
+    ))}
+
+<div className='d-flex justify-content-end mt-4'>
+          <Button
+            className="d-flex justify-content-center align-items-center rounded-4"
+            style={{minWidth:'150px'}}
+            variant="outline-dark"
+            type="submit"
+            onClick={() => {
+              handleSchoolList()
+            }}
+          >
+            Next step
+          </Button>
+      </div>
+          </Form>
+      )}
+      </Formik>
+    )} 
+
+    if (usercountry === "Sweden") {
+      return (
+    <Formik validationSchema={schema}
+     // onSubmit={console.log('')}
+      initialValues={{
+      }}
+    >
+    {({
+      
+      handleChange,
+      handleBlur,
+      values,
+      touched,
+      errors,
+    }) => (
+        <Form noValidate onSubmit={handleSchoolList}>
+        <Row className='d-flex mt-5'>
+          <Col lg={3}>
+            <h4>List of Schools</h4>
+            <p>You can select any 5 Schools.</p>
+          </Col>
+        </Row>
+        {SwedenSchool.map((item, index) => ( 
+     <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+     <Form.Check
+       type='checkbox'
+       //name={item}
+       value={item}
+       label={item}
+        // disabled={school.length==5}
+      // value={item}
+      onChange={(e) => {
+        getSchool(e)
+      }}
+     />
+      </Col>
+  ))}
+
+<div className='d-flex justify-content-end mt-4'>
+        <Button
+          className="d-flex justify-content-center align-items-center rounded-4"
+          style={{minWidth:'150px'}}
+          variant="outline-dark"
+          type="submit"
+          onClick={() => {
+            handleSchoolList()
+          }}
+        >
+          Next step
+        </Button>
+    </div>
+        </Form>
+    )}
+    </Formik>
+  )} 
+
+  if (usercountry === "China") {
+    return (
+  <Formik validationSchema={schema}
+   // onSubmit={console.log('')}
+    initialValues={{
+    }}
+  >
+  {({
+    
+    handleChange,
+    handleBlur,
+    values,
+    touched,
+    errors,
+  }) => (
+      <Form noValidate onSubmit={handleSchoolList}>
+      <Row className='d-flex mt-5'>
+        <Col lg={3}>
+          <h4>List of Schools</h4>
+          <p>You can select any 5 Schools.</p>
+        </Col>
+      </Row>
+      {ChinaSchool.map((item, index) => ( 
+   <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+   <Form.Check
+     type='checkbox'
+     //name={item}
+     value={item}
+     label={item}
+      // disabled={school.length==5}
+    // value={item}
+    onChange={(e) => {
+      getSchool(e)
+    }}
+   />
+    </Col>
+))}
+
+<div className='d-flex justify-content-end mt-4'>
+      <Button
+        className="d-flex justify-content-center align-items-center rounded-4"
+        style={{minWidth:'150px'}}
+        variant="outline-dark"
+        type="submit"
+        onClick={() => {
+          handleSchoolList()
+        }}
+      >
+        Next step
+      </Button>
+  </div>
+      </Form>
+  )}
+  </Formik>
+)} 
+
+        if (usercountry === "Germany") {
+          return (
+        <Formik validationSchema={schema}
+        // onSubmit={console.log('')}
+          initialValues={{
+          }}
+        >
+        {({
+          
+          handleChange,
+          handleBlur,
+          values,
+          touched,
+          errors,
+        }) => (
+            <Form noValidate onSubmit={handleSchoolList}>
+            <Row className='d-flex mt-5'>
+              <Col lg={3}>
+                <h4>List of Schools</h4>
+                <p>You can select any 5 Schools.</p>
+              </Col>
+            </Row>
+            {GermanySchool.map((item, index) => ( 
+        <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+        <Form.Check
+          type='checkbox'
+          //name={item}
+          value={item}
+          label={item}
+            // disabled={school.length==5}
+          // value={item}
+          onChange={(e) => {
+            getSchool(e)
+          }}
+        />
+          </Col>
+        ))}
+
+        <div className='d-flex justify-content-end mt-4'>
+            <Button
+              className="d-flex justify-content-center align-items-center rounded-4"
+              style={{minWidth:'150px'}}
+              variant="outline-dark"
+              type="submit"
+              
+            >
+              Next step
+            </Button>
+        </div>
+            </Form>
+        )}
+        </Formik>
+        )} 
+
+        if (usercountry === "US") {
+          return (
+        <Formik validationSchema={schema}
+        // onSubmit={console.log('')}
           initialValues={{
           }}
         >
@@ -67,27 +356,29 @@ const Schoollist =({
                 <p>You can select any 5 Schools.</p>
               </Col>
             </Row>
-      {SchoolList.map((item, index) => ( 
-         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
-         <Form.Check
-           type='checkbox'
-           //name={item}
-           value={item}
-           label={item}
+            {UsSchool.map((item, index) => ( 
+        <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
+        <Form.Check
+          type='checkbox'
+          //name={item}
+          value={item}
+          label={item}
             // disabled={school.length==5}
           // value={item}
           onChange={(e) => {
             getSchool(e)
           }}
-         />
+        />
           </Col>
-      ))}
-  <div className='d-flex justify-content-end mt-4'>
+        ))}
+
+        <div className='d-flex justify-content-end mt-4'>
             <Button
               className="d-flex justify-content-center align-items-center rounded-4"
               style={{minWidth:'150px'}}
               variant="outline-dark"
               type="submit"
+              
             >
               Next step
             </Button>
@@ -95,161 +386,61 @@ const Schoollist =({
             </Form>
         )}
         </Formik>
-      )} 
-      if( collegepush === "true"){
-        return(
-       
+        )} 
+
+        if (usercountry === "Canada") {
+          return (
         <Formik validationSchema={schema}
         // onSubmit={console.log('')}
-         initialValues={{
-         }}
-       >
-       {({
-         handleChange,
-         handleBlur,
-         values,
-         touched,
-         errors,
-       }) => (
-           <Form noValidate onSubmit={handleCollegeList}>
-           <Row className='d-flex mt-5'>
-             <Col lg={3}>
-               <h4>List of Colleges</h4>
-               <p>You can select any 5 Colleges.</p>
-             </Col>
-           </Row>
-     {CollegeList.map((item, index) => (
+          initialValues={{
+          }}
+        >
+        {({
+          
+          handleChange,
+          handleBlur,
+          values,
+          touched,
+          errors,
+        }) => (
+            <Form noValidate onSubmit={handleSchoolList}>
+            <Row className='d-flex mt-5'>
+              <Col lg={3}>
+                <h4>List of Schools</h4>
+                <p>You can select any 5 Schools.</p>
+              </Col>
+            </Row>
+            {CanadaSchool.map((item, index) => ( 
         <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
         <Form.Check
           type='checkbox'
           //name={item}
           value={item}
           label={item}
-           // disabled={school.length==5}
-         // value={item}
-         onChange={(e) => {
-           getCollege(e)
-         }}
+            // disabled={school.length==5}
+          // value={item}
+          onChange={(e) => {
+            getSchool(e)
+          }}
         />
-         </Col>
-     ))}      
-             <div className='d-flex justify-content-end mt-4'>         
-           <Button
-             className="d-flex justify-content-center align-items-center rounded-4"
-             style={{minWidth:'150px'}}
-             variant="outline-dark"
-             type="submit"
-           >
-             Next step
-           </Button>
-       </div>
-           </Form>        
-       )}
-       </Formik>        
-        )
-      }
-      if( universitypush === "true"){
-        return(
-          <Formik validationSchema={schema}
-        // onSubmit={console.log('')}
-         initialValues={{
-         }}
-       >
-       {({
-         handleChange,
-         handleBlur,
-         values,
-         touched,
-         errors,
-       }) => (       
-           <Form noValidate onSubmit={handleUniversityList}>
-           <Row className='d-flex mt-5'>
-             <Col lg={3}>
-               <h4>List of Universities</h4>
-               <p>You can select any 5 Universities.</p>
-             </Col>
-           </Row>       
-           {UniversityList.map((item, index) => (
-        <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
-        <Form.Check
-          type='checkbox'
-          //name={item}
-          value={item}
-          label={item}
-         // disabled={school.length==5}
-         // value={item}
-         onChange={(e) => {
-           getUniversity(e)
-         }}
-        />
-         </Col>            
-     ))}     
-       <div className='d-flex justify-content-end mt-4'>
-           <Button
-             className="d-flex justify-content-center align-items-center rounded-4"
-             style={{minWidth:'150px'}}
-             variant="outline-dark"
-             type="submit"
-           >
-             Next step
-           </Button>
-       </div>
-           </Form>
-       )}
-       </Formik>  
-        )
-      }
-      if( internationalpush === "true"){
-        return(
-          <Formik validationSchema={schema}
-          // onSubmit={console.log('')}
-           initialValues={{
-           }}
-         >
-         {({
-           handleChange,
-           handleBlur,
-           values,
-           touched,
-           errors,
-         }) => (       
-             <Form noValidate onSubmit={handleInternationalList}>
-             <Row className='d-flex mt-5'>
-               <Col lg={3}>
-                 <h4>List of Countries</h4>
-                 <p>Select A Country</p>
-               </Col>
-             </Row>       
-             {CountryList.map((item, index) => (
-          <Col lg={12} key={index} style={{display:'flex', flexDirection:'column', justifyContent:'center', border:'1px solid grey', padding :'15px', margin:'10px' , borderRadius:'0.5rem' }}>
-          <Form.Check
-            type='checkbox'
-            //name={item}
-            value={item}
-            label={item}
-           // disabled={school.length==5}
-           // value={item}
-           onChange={(e) => {
-             getInternational(e)
-           }}
-          />
-           </Col>            
-       ))}     
-         <div className='d-flex justify-content-end mt-4'>
-             <Button
-               className="d-flex justify-content-center align-items-center rounded-4"
-               style={{minWidth:'150px'}}
-               variant="outline-dark"
-               type="submit"
-             >
-               Next step
-             </Button>
-         </div>
-             </Form>
-         )}
-         </Formik>  
-        )
-      }
+          </Col>
+        ))}
+
+        <div className='d-flex justify-content-end mt-4'>
+            <Button
+              className="d-flex justify-content-center align-items-center rounded-4"
+              style={{minWidth:'150px'}}
+              variant="outline-dark"
+              type="submit"
+             
+            >
+              Next step
+            </Button>
+        </div>
+            </Form>
+        )}
+        </Formik>
+        )} 
       else {
         return(
           <div> 

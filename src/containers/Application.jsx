@@ -50,7 +50,7 @@ const Application = () => {
       localStorage.setItem('college',JSON.stringify (college))
       localStorage.setItem('university', JSON .stringify(university))
       localStorage.setItem('international', JSON .stringify(international))
-      navigate('/list')
+      navigate('/countrylist')
     }
    
   },[school , college , university , international])

@@ -1,16 +1,16 @@
 import {
-    COMPANYLIST 
-  } from '../constants/actionTypes/companylist'
+    COLLEGELIST 
+  } from '../constants/actionTypes/collegelist'
   
   const INITIAL_STATE = {
     currentUser: {
-      company:''
+      college:[]
     }
   }
   
   const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-      case COMPANYLIST:
+      case COLLEGELIST:
         return {
           ...state,
           currentUser:action.payload
